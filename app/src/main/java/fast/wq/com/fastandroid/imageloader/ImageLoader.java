@@ -72,4 +72,6 @@ public class ImageLoader {
      * ui中 handler
      */
     private Handler mHandler;
+
+    //
 }
