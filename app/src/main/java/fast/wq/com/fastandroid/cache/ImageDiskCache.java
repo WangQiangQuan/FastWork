@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import fast.wq.com.fastandroid.CloseUtils;
+import fast.wq.com.fastandroid.utils.CloseUtils;
 
 /**
  * 磁盘缓存

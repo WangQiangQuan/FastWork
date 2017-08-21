@@ -1,4 +1,4 @@
-package fast.wq.com.fastandroid;
+package fast.wq.com.fastandroid.utils;
 
 import java.io.Closeable;
 import java.io.IOException;
