@@ -9,6 +9,17 @@ import android.graphics.BitmapFactory;
  */
 
 public class BitmapUtils {
+    public static Bitmap decodeSampleBitmapFromPath(String path,int reqWidth,int reqHeight){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+
+//        BitmapFactory.decodeResource(res,resId,options);
+        BitmapFactory.decodeFile(path,options);
+        options.inSampleSize = calculateInSampleSize(options,reqWidth,reqHeight);
+
+        options.inJustDecodeBounds = false;
+        return    BitmapFactory.decodeFile(path,options);
+    }
     public static Bitmap decodeSampleBitmapFromResource(Resources res,int resId,int reqWidth,int reqHeight){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
