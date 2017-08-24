@@ -63,7 +63,6 @@ public class ConfirmDialog extends DmBaseDialog
         holder.setOnClickListener(R.id.cancel, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                    dialog.dismiss();
                 dialog.disMissDialog();
             }
         });
@@ -71,7 +70,7 @@ public class ConfirmDialog extends DmBaseDialog
         holder.setOnClickListener(R.id.ok, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                dialog.disMissDialog();
             }
         });
     }
