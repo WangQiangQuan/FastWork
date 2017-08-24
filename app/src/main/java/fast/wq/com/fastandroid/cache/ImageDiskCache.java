@@ -32,4 +32,9 @@ public class ImageDiskCache implements ImageCache {
             CloseUtils.closeQuietiy(fileOutputStream);
         }
     }
+
+    @Override
+    public void clearCache() {
+
+    }
 }

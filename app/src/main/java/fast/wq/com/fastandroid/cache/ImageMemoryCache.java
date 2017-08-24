@@ -34,11 +34,24 @@ public class ImageMemoryCache implements ImageCache {
 
     @Override
     public Bitmap get(String url) {
+        if (url == null){
+            return null;
+        }
         return mMemoryCache.get(url);
     }
 
     @Override
     public void put(String url, Bitmap bitmap) {
+        if (url == null){
+            return;
+        }
         mMemoryCache.put(url, bitmap);
+    }
+
+    @Override
+    public void clearCache() {
+        if (mMemoryCache != null) {
+            mMemoryCache.evictAll();
+        }
     }
 }
