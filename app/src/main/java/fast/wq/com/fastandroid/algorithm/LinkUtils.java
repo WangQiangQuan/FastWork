@@ -1,7 +1,6 @@
 package fast.wq.com.fastandroid.algorithm;
 
 import java.util.HashSet;
-import java.util.IllegalFormatCodePointException;
 import java.util.Stack;
 
 /**
@@ -20,6 +19,9 @@ public class LinkUtils {
 
     //1删除单链表中的指定节点
     public static void deleteNode(Node head, Node deleteNode) {
+        if (head == null) {
+            return;
+        }
         //删除尾节点，顺序查找尾部节点的前一个节
         if (deleteNode.next == null) {
             while (head.next != deleteNode) {
@@ -58,6 +60,9 @@ public class LinkUtils {
     }
 
     public Node removeValue(Node head, int num) {
+        if (head == null) {
+            return null;
+        }
         //找到第一个头结点
         while (head != null) {
             if (head.data != num) {
@@ -95,13 +100,13 @@ public class LinkUtils {
         pre = head;
         cur = head;
         while (cur != null) {
-            if (mHashSet.contains(cur.data)){
+            if (mHashSet.contains(cur.data)) {
                 pre.next = cur.next;
-            }else {
+            } else {
                 mHashSet.add(cur.data);
                 pre = cur;
             }
-                cur = cur.next;
+            cur = cur.next;
         }
 
         return head;
