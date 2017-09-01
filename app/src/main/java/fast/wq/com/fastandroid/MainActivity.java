@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import fast.wq.com.fastandroid.utils.StringUtils;
+import fast.wq.com.fastandroid.utils.BitmapUtils;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     TaskLinerLayout mtaskLinerlayout;
+    private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +24,15 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d(TAG, "onCreate() called with: result = [" + result + "]");
 
 
-        mtaskLinerlayout = (TaskLinerLayout) findViewById(R.id.layout);
-        addVIew(10);
+//        mtaskLinerlayout = (TaskLinerLayout) findViewById(R.id.layout);
+//        addVIew(10);
+//
+//       String url= StringUtils.getPageName("http://downloadb.dewmobile.net/z/qiangjing13.apk");
+//        Log.i("wang",url);
 
-       String url= StringUtils.getPageName("http://downloadb.dewmobile.net/z/qiangjing13.apk");
-        Log.i("wang",url);
+        image = (ImageView) findViewById(R.id.image);
+        BitmapUtils.calScleType(image,98,74,200,200);
+        image.setImageResource(R.drawable.test);
     }
 
     private void addVIew(int size){

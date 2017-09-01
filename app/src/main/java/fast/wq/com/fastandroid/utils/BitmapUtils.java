@@ -3,6 +3,7 @@ package fast.wq.com.fastandroid.utils;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 /**
  *
@@ -46,5 +47,35 @@ public class BitmapUtils {
         }
 
         return inSampleSize;
+    }
+
+    /**
+     *  根据图片的宽高，选择不同的scletype
+     * @param srcWidth 下载的宽高
+     * @param srcHeight
+     * @param reqWidth 75 需要的宽高
+     * @param reqHeight 98
+     */
+    public static void calScleType(ImageView mImageView,int srcWidth, int srcHeight, int reqWidth, int reqHeight){
+
+        //宽高都小于 imageview
+        if (srcWidth <= reqWidth && srcHeight <= reqHeight){
+            mImageView.setScaleType(ImageView.ScaleType.CENTER);
+        }
+        //宽高都大于 imageview
+        if (srcWidth > reqWidth && srcHeight >reqHeight){
+//            mImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+
+        //宽 小于 imageview 高大
+        if (srcWidth < reqWidth && srcHeight >reqHeight){
+            mImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+
+        //宽 大于 imageview 高小
+        if (srcWidth < reqWidth && srcHeight >reqHeight){
+            mImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        }
+
     }
 }
