@@ -1,4 +1,4 @@
-package fast.wq.com.fastandroid;
+package fast.wq.com.fastandroid.gloable;
 
 /**
  * Created by admin on 2017/8/28.

@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import fast.wq.com.fastandroid.utils.BitmapUtils;
+import fast.wq.com.fastandroid.badge.BadgeChangedListener;
+import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
+import fast.wq.com.fastandroid.gloable.GlobalStates;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -30,10 +32,26 @@ public class MainActivity extends AppCompatActivity {
 //       String url= StringUtils.getPageName("http://downloadb.dewmobile.net/z/qiangjing13.apk");
 //        Log.i("wang",url);
 
-        image = (ImageView) findViewById(R.id.image);
-        BitmapUtils.calScleType(image,98,74,200,200);
-        image.setImageResource(R.drawable.test);
+//        image = (ImageView) findViewById(R.id.image);
+//        BitmapUtils.calScleType(image,98,74,200,200);
+//        image.setImageResource(R.drawable.test);
+
+//        PushBadgeProcessor mPushProcessor = new PushBadgeProcessor(this,1);
+//        mPushProcessor.registerBadgeChangeListener(mListener);
+//        mPushProcessor.reloadData();
+
+        GlobalStates.setContext(this.getApplication());
+
+
     }
+
+    BadgeChangedListener mListener = new BadgeChangedListener(){
+
+        @Override
+        public void onBadgeChanged(BadgeMessage badgeMessage) {
+            Log.i("wang","badgeMessage"+badgeMessage.toString());
+        }
+    };
 
     private void addVIew(int size){
         for (int i=0;i<size;i++){
