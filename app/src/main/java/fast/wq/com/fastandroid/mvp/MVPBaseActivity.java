@@ -5,7 +5,8 @@ import android.os.Bundle;
 
 /**
  * Created by wangqiang on 2017/8/21.
- *
+ * 抽象 统一绑定和解绑
+ * 使用范型来通用
  */
 
 public abstract class MVPBaseActivity<V ,T extends  BasePresenter<V>> extends Activity {

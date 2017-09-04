@@ -3,12 +3,14 @@ package fast.wq.com.fastandroid;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
+import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
 import fast.wq.com.fastandroid.gloable.GlobalStates;
 
@@ -18,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     TaskLinerLayout mtaskLinerlayout;
     private ImageView image;
+    private DynamicView mdynamicView;
+    private float mStartX,mStopX;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +46,22 @@ public class MainActivity extends AppCompatActivity {
 
         GlobalStates.setContext(this.getApplication());
 
+        mdynamicView = (DynamicView) findViewById(R.id.mdynamicView);
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                mStartX = ev.getRawX();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mStopX = ev.getRawX();
+                mdynamicView.updateView(mStartX,mStopX);
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
     BadgeChangedListener mListener = new BadgeChangedListener(){

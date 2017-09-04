@@ -5,6 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fast.wq.com.fastandroid.MainActivity">
+    <fast.wq.com.fastandroid.view.DynamicView
+        android:id="@+id/mdynamicView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></fast.wq.com.fastandroid.view.DynamicView>
 
     <LinearLayout
         android:layout_centerInParent="true"
