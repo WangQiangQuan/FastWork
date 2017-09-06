@@ -1,6 +1,5 @@
 package fast.wq.com.fastandroid;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -9,11 +8,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import fast.wq.com.fastandroid.activity.VGHActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
-import fast.wq.com.fastandroid.gloable.GlobalStates;
-import fast.wq.com.fastandroid.utils.LinkListUtils;
+import fast.wq.com.fastandroid.utils.CyclicBarrierUtils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
 
@@ -47,18 +44,21 @@ public class MainActivity extends AppCompatActivity {
 //        mPushProcessor.registerBadgeChangeListener(mListener);
 //        mPushProcessor.reloadData();
 
-        GlobalStates.setContext(this.getApplication());
+//        GlobalStates.setContext(this.getApplication());
+//
+//        mdynamicView = (DynamicView) findViewById(R.id.mdynamicView);
+//        LinkListUtils list = new LinkListUtils();
+//        list.add(111);
+//        list.add(222);
+//        list.add(333);
+//        list.cauclate();
+//
+//        Intent mintent = new Intent(this, VGHActivity.class);
+//        this.startActivity(mintent);
 
-        mdynamicView = (DynamicView) findViewById(R.id.mdynamicView);
-        LinkListUtils list = new LinkListUtils();
-        list.add(111);
-        list.add(222);
-        list.add(333);
-        list.cauclate();
+//        CountDownLatchUtils.go();
 
-        Intent mintent = new Intent(this, VGHActivity.class);
-        this.startActivity(mintent);
-
+        CyclicBarrierUtils.go();
     }
 
     @Override
