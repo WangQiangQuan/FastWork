@@ -1,5 +1,6 @@
 package fast.wq.com.fastandroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,9 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import fast.wq.com.fastandroid.activity.ListActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
-import fast.wq.com.fastandroid.utils.CyclicBarrierUtils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
 
@@ -54,11 +55,12 @@ public class MainActivity extends AppCompatActivity {
 //        list.cauclate();
 //
 //        Intent mintent = new Intent(this, VGHActivity.class);
-//        this.startActivity(mintent);
+        Intent mintent = new Intent(this, ListActivity.class);
+        this.startActivity(mintent);
 
 //        CountDownLatchUtils.go();
 
-        CyclicBarrierUtils.go();
+//        CyclicBarrierUtils.go();
     }
 
     @Override
