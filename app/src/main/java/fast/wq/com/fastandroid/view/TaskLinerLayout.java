@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -53,6 +54,29 @@ public class TaskLinerLayout extends LinearLayout {
             }
             mViews.clear();
         }
+    }
+
+    private LinerAdapter mAdapter;
+
+    public void setAdapter(LinerAdapter mAdapter){
+        this.mAdapter = mAdapter;
+    }
+    public void notifyDataChanged(){
+
+        if (mAdapter == null || mAdapter.getCount()==0){
+            return;
+        }
+        removeAllItemView();
+        for (int i=0;i<mAdapter.getCount();i++){
+            addItemView(mAdapter.getView(i,this));
+        }
+    }
+
+    public interface LinerAdapter{
+
+        View getView(int position, ViewGroup container);
+
+        int getCount();
     }
 
 }

@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvp.MVPActivity"></activity>
+        <activity android:name=".mvp.MVPActivity" />
+        <activity android:name=".activity.VGHActivity"></activity>
     </application>
 
 </manifest>
