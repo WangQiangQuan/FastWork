@@ -1,17 +1,21 @@
 package fast.wq.com.fastandroid;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.AbsoluteSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import fast.wq.com.fastandroid.activity.ListActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
+import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
 
@@ -23,10 +27,13 @@ public class MainActivity extends AppCompatActivity {
     private ImageView image;
     private DynamicView mdynamicView;
     private float mStartX,mStopX;
+    private TextView mTvTotalCoins;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTvTotalCoins = (TextView) findViewById(R.id.total_zapya);
+
 //        String result = getArgUrl(GS_HOME_RES_RECORD_URL,"1");
 //        Log.d(TAG, "onCreate() called with: result = [" + result + "]");
 
@@ -55,14 +62,38 @@ public class MainActivity extends AppCompatActivity {
 //        list.cauclate();
 //
 //        Intent mintent = new Intent(this, VGHActivity.class);
-        Intent mintent = new Intent(this, ListActivity.class);
-        this.startActivity(mintent);
+//        Intent mintent = new Intent(this, ListActivity.class);
+//        this.startActivity(mintent);
 
 //        CountDownLatchUtils.go();
 
 //        CyclicBarrierUtils.go();
-    }
 
+        setCoins(920);
+
+    }
+    private void setCoins(int coins) {
+        String totalFormatStr = getString(R.string.zapya_bean_total_format);
+        Integer coinsInteger = Integer.valueOf(coins);
+        String formattedStr = String.format(totalFormatStr, coins);
+        String coinsStr = coinsInteger.toString();
+        int startIndex = formattedStr.indexOf(coinsStr);
+        int endIndex = startIndex + coinsStr.length();
+        SpannableString tzSs = DmSpannableUtils.setTextSize(formattedStr,startIndex,endIndex,54);
+        mTvTotalCoins.setText( tzSs);
+
+
+        SpannableStringBuilder sb = new SpannableStringBuilder(formattedStr); // 包装字体内容
+//        ForegroundColorSpan fcs = new ForegroundColorSpan(getResources().getColor(R.color.)); // 设置字体颜色
+        StyleSpan bss = new StyleSpan(android.graphics.Typeface.BOLD); // 设置字体样式
+        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(54);  // 设置字体大小
+
+//        sb.setSpan(fcs, 0, 10, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(bss, startIndex, endIndex, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        sb.setSpan(ass, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvTotalCoins.setText(sb);
+//        mTvTotalCoins.setText(DmSpannableUtils.setTextForeground(formattedStr, startIndex, endIndex, getResources().getColor(R.color.bean_item_positive_color)));
+    }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()){

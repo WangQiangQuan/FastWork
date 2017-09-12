@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">FastAndroid</string>
+
+    <string name="load_fail">加载失败,点击重试</string>
+    <string name="dm_progress_loading">加载中...</string>
+    <string name="zapya_bean_total_format">%1$d颗牙豆</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

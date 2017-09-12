@@ -28,4 +28,13 @@
         <item name="android:textColor">#969696</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="LoadingProgressStyle" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/dm_loading_progress</item>
+        <item name="android:indeterminateDuration">5000</item>
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+    </style>
 </resources>
