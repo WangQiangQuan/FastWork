@@ -25,6 +25,7 @@ public class ListActivity extends Activity {
     private RecyclerView mRecyclerView;
     private List<String> mDatas;
     private List<ListBean> mLists;
+    private ListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,13 @@ public class ListActivity extends Activity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        mRecyclerView.setAdapter(new HomeAdapter());
 //        mRecyclerView.setAdapter(new MulAdapter(this));
-        mRecyclerView.setAdapter(new ListAdapter(this,mLists));
+
+        mAdapter = new ListAdapter(this,mLists);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL_LIST));
+
+
     }
 
     public void stopRefreshing() {
