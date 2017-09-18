@@ -18,6 +18,7 @@ import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
+import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -26,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
     TaskLinerLayout mtaskLinerlayout;
     private ImageView image;
     private DynamicView mdynamicView;
-    private float mStartX,mStopX;
+    private float mStartX, mStopX;
     private TextView mTvTotalCoins;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
 //        CyclicBarrierUtils.go();
 
-        setCoins(920);
-
+//        setCoins(920);
+        go2ShortVideo();
     }
+
     private void setCoins(int coins) {
         String totalFormatStr = getString(R.string.zapya_bean_total_format);
         Integer coinsInteger = Integer.valueOf(coins);
@@ -79,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         String coinsStr = coinsInteger.toString();
         int startIndex = formattedStr.indexOf(coinsStr);
         int endIndex = startIndex + coinsStr.length();
-        SpannableString tzSs = DmSpannableUtils.setTextSize(formattedStr,startIndex,endIndex,54);
-        mTvTotalCoins.setText( tzSs);
+        SpannableString tzSs = DmSpannableUtils.setTextSize(formattedStr, startIndex, endIndex, 54);
+        mTvTotalCoins.setText(tzSs);
 
 
         SpannableStringBuilder sb = new SpannableStringBuilder(formattedStr); // 包装字体内容
@@ -94,36 +97,37 @@ public class MainActivity extends AppCompatActivity {
         mTvTotalCoins.setText(sb);
 //        mTvTotalCoins.setText(DmSpannableUtils.setTextForeground(formattedStr, startIndex, endIndex, getResources().getColor(R.color.bean_item_positive_color)));
     }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()){
+        switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mStartX = ev.getRawX();
                 break;
             case MotionEvent.ACTION_MOVE:
                 mStopX = ev.getRawX();
-                mdynamicView.updateView(mStartX,mStopX);
+                mdynamicView.updateView(mStartX, mStopX);
                 break;
         }
         return super.dispatchTouchEvent(ev);
     }
 
-    BadgeChangedListener mListener = new BadgeChangedListener(){
+    BadgeChangedListener mListener = new BadgeChangedListener() {
 
         @Override
         public void onBadgeChanged(BadgeMessage badgeMessage) {
-            Log.i("wang","badgeMessage"+badgeMessage.toString());
+            Log.i("wang", "badgeMessage" + badgeMessage.toString());
         }
     };
 
-    private void addVIew(int size){
-        for (int i=0;i<size;i++){
+    private void addVIew(int size) {
+        for (int i = 0; i < size; i++) {
 
-            View  view = this.getLayoutInflater().inflate(R.layout.item_row,null);
+            View view = this.getLayoutInflater().inflate(R.layout.item_row, null);
             TextView tv = (TextView) view.findViewById(R.id.tv);
             TextView action = (TextView) view.findViewById(R.id.action);
             onclick(i, action);
-            tv.setText("ss = "+i);
+            tv.setText("ss = " + i);
             mtaskLinerlayout.addView(view);
         }
     }
@@ -133,10 +137,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Log.i("wang","i="+i);
+                Log.i("wang", "i=" + i);
             }
         });
     }
 
+    public void go2ShortVideo() {
+        ShortVideoDialog.show(getSupportFragmentManager(), new ShortVideoDialog.VideoCallback() {
+
+            @Override
+            public void videoPathCall(String path) {
+                Log.d(TAG, "videoPathCall() called with: path = [" + path + "]");
+            }
+        }, ShortVideoDialog.Q720, MainActivity.this);
+    }
 
 }
