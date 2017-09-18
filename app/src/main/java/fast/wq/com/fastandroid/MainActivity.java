@@ -1,10 +1,14 @@
 package fast.wq.com.fastandroid;
 
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
@@ -13,9 +17,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
+import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
@@ -46,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
 //       String url= StringUtils.getPageName("http://downloadb.dewmobile.net/z/qiangjing13.apk");
 //        Log.i("wang",url);
 
-//        image = (ImageView) findViewById(R.id.image);
+        image = (ImageView) findViewById(R.id.image);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                openView(mPath);
+            }
+        });
 //        BitmapUtils.calScleType(image,98,74,200,200);
 //        image.setImageResource(R.drawable.test);
 
@@ -142,14 +156,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private String mPath;
+
     public void go2ShortVideo() {
         ShortVideoDialog.show(getSupportFragmentManager(), new ShortVideoDialog.VideoCallback() {
 
             @Override
             public void videoPathCall(String path) {
                 Log.d(TAG, "videoPathCall() called with: path = [" + path + "]");
+
+                //根据视频地址获取缩略图
+                mPath = path;
+                Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(path, MediaStore.Video.Thumbnails.MINI_KIND);
+                image.setImageBitmap(bitmap);
+//                first.setText(getFileSize(path));
             }
-        }, ShortVideoDialog.Q720, MainActivity.this);
+        }, ShortVideoDialog.Q1080, MainActivity.this);
     }
 
+    public void openView(String path) {
+        if (TextUtils.isEmpty(path)) {
+
+            return;
+        }
+        File file = new File(path);
+        Utils.openFile(file, this);
+    }
 }

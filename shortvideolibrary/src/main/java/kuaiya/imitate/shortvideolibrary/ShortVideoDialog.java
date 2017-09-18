@@ -226,7 +226,7 @@ public class ShortVideoDialog extends DialogFragment {
             } else {
                 Toast.makeText(getContext(), "录制过短，请重试", Toast.LENGTH_SHORT).show();
             }
-            dismiss();
+            disMissDialog();
         }
     }
 
@@ -256,6 +256,13 @@ public class ShortVideoDialog extends DialogFragment {
      */
     private void releaseCamera() {
         mCameraPreview.releaseCamera();
+    }
+
+    public void disMissDialog() {
+        if (this != null && this.getDialog() != null && this.getDialog().isShowing()) {
+            this.dismiss();
+        }
+
     }
 
     /**
