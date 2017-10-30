@@ -8,6 +8,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by admin on 2017/9/18.
@@ -53,6 +54,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         return  mCamera;
     }
 
+    public void setfixedsize(int videoWidth,int videoHeight){
+        //设置屏幕分辨率
+        mHolder.setFixedSize(videoWidth, videoHeight);
+    }
+
     public void releaseCamera() {
         if (mCamera != null) {
             mCamera.release();        // release the camera for other applications
@@ -66,8 +72,19 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             if (mCamera == null) return;
             mCamera.setPreviewDisplay(surfaceHolder);
 
+//            Camera.Parameters parameters = mCamera.getParameters();
+//            parameters.setFlashMode(flashMode);
+//            mCamera.setParameters(parameters);
+
             Camera.Parameters parameters = mCamera.getParameters();
-            parameters.setFlashMode(flashMode);
+            //实现Camera自动对焦
+            List<String> focusModes = parameters.getSupportedFocusModes();
+            if (focusModes != null) {
+                for (String mode : focusModes) {
+                    mode.contains("continuous-video");
+                    parameters.setFocusMode("continuous-video");
+                }
+            }
             mCamera.setParameters(parameters);
 
             mCamera.startPreview();

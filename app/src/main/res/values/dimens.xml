@@ -7,4 +7,5 @@
     <dimen name="srcheight">16dp</dimen>
     <dimen name="imagewidth">16dp</dimen>
     <dimen name="imagehight">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

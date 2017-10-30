@@ -39,7 +39,7 @@ public class ListActivity extends Activity {
             @Override
             public void onRefresh() {
                 mSwipeRefreshLayout.setRefreshing(true);
-
+//                mLists.clear();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

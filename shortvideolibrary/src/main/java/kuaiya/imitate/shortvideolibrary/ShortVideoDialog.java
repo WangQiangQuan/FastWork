@@ -9,13 +9,17 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -45,10 +49,12 @@ public class ShortVideoDialog extends DialogFragment {
     public static int Q720 = CamcorderProfile.QUALITY_720P;
     public static int Q1080 = CamcorderProfile.QUALITY_1080P;
     public static int Q21600 = CamcorderProfile.QUALITY_2160P;
-    private final int MAX_TIME = 5000;
+    private final int MAX_TIME = 5000+300;
     private final int Min_TIME = 3000;
     private final int TIME_SLICE = 10;
 
+    //屏幕分辨率
+    private int videoWidth, videoHeight;
     private CameraPreview mCameraPreview;
     private ProgressBar mProgressRight, mProgressLeft;
     private MediaRecorder mMediaRecorder;
@@ -59,13 +65,16 @@ public class ShortVideoDialog extends DialogFragment {
     private String fileName;
     private int mTimeCount;
     private Handler mainHandler = new Handler(Looper.getMainLooper());
+    @StyleRes
+    private int animStyle;
 
 
-    public static ShortVideoDialog newInstance(VideoCallback videoCall, int quality, Context context) {
+    public static ShortVideoDialog newInstance(VideoCallback videoCall, int quality, Context context, @StyleRes int animStyle) {
         ShortVideoDialog dialog = new ShortVideoDialog();
         dialog.setVideoCall(videoCall);
         dialog.setQuality(quality);
         dialog.setmContext(context);
+        dialog.setAnimStyle(animStyle);
         dialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.maskDialog);
         return dialog;
     }
@@ -84,12 +93,37 @@ public class ShortVideoDialog extends DialogFragment {
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        initParms();
+    }
+
+    private void initParms() {
+        Window window = getDialog().getWindow();
+        if (window != null) {
+            //设置dialog进入、退出的动画
+            window.setWindowAnimations(animStyle);
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.gravity = Gravity.BOTTOM;
+            window.setAttributes(lp);
+
+        }
+    }
+
     private void initview(View v) {
         preview = (FrameLayout) v.findViewById(R.id.camera_preview);
         if (mContext == null) {
             mContext = getActivity();
         }
+//        videoWidth = 640;
+//        videoHeight = 480;
+
+        videoWidth = 720;
+        videoHeight = 1280;
+
         mCameraPreview = new CameraPreview(mContext);
+//        mCameraPreview.setfixedsize(videoWidth,videoHeight);
         mProgressRight = (ProgressBar) v.findViewById(R.id.progress_right);
         mProgressLeft = (ProgressBar) v.findViewById(R.id.progress_left);
         mProgressRight.setMax(MAX_TIME);
@@ -103,6 +137,7 @@ public class ShortVideoDialog extends DialogFragment {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+
                         //按下 开始录像
                         if (!isRecording) {
                             if (prepareVideoRecorder()) {
@@ -115,7 +150,7 @@ public class ShortVideoDialog extends DialogFragment {
                                     @Override
                                     public void run() {
                                         mTimeCount++;
-                                        Log.d(TAG, "run() called = "+mTimeCount+" / "+Thread.currentThread());
+                                        Log.d(TAG, "run() called = " + mTimeCount + " / " + Thread.currentThread());
                                         mainHandler.post(updateProgress);
                                         if (mTimeCount * TIME_SLICE >= MAX_TIME) {
                                             if (mTimer != null) mTimer.cancel();
@@ -131,6 +166,10 @@ public class ShortVideoDialog extends DialogFragment {
                     case MotionEvent.ACTION_UP:
                         //抬起 停止录像
                         recordStop();
+
+//                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                            mMediaRecorder.pause();
+//                        }
                         break;
                 }
                 return true;
@@ -174,10 +213,47 @@ public class ShortVideoDialog extends DialogFragment {
         }
     };
 
-    public static void show(FragmentManager ft, VideoCallback videoCall, int quality, Context context) {
-        DialogFragment newFragment = ShortVideoDialog.newInstance(videoCall, quality, context);
+    public static void show(FragmentManager ft, VideoCallback videoCall, int quality, Context context, @StyleRes int animStyle) {
+        DialogFragment newFragment = ShortVideoDialog.newInstance(videoCall, quality, context, animStyle);
         newFragment.show(ft, TAG);
     }
+
+//    //初始化 mMediaRecorder 用于录像
+//    private boolean prepareVideoRecorder() {
+//
+//        if (mCameraPreview.getCamera() == null) return false;
+//        mMediaRecorder = new MediaRecorder();
+//        mCameraPreview.getCamera().unlock();
+//        mMediaRecorder.setCamera(mCameraPreview.getCamera());
+//        //声音
+//        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+//        //视频
+//        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+////        mMediaRecorder.setVideoFrameRate(30);
+////        mMediaRecorder.setVideoEncodingBitRate(1 * 1024 * 1024 * 100);
+//
+//        //设置分辨率为480P
+//        mMediaRecorder.setProfile(CamcorderProfile.get(quality));
+//        //路径
+//        mMediaRecorder.setOutputFile(getOutputMediaFile().toString());
+//        mMediaRecorder.setPreviewDisplay(mCameraPreview.getHolder().getSurface());
+//
+//
+//        try {
+//            //旋转90度 保持竖屏
+//            mMediaRecorder.setOrientationHint(90);
+//            mMediaRecorder.prepare();
+//        } catch (IllegalStateException e) {
+//            Log.d(TAG, "IllegalStateException preparing MediaRecorder: " + e.getMessage());
+//            releaseMediaRecorder();
+//            return false;
+//        } catch (IOException e) {
+//            Log.d(TAG, "IOException preparing MediaRecorder: " + e.getMessage());
+//            releaseMediaRecorder();
+//            return false;
+//        }
+//        return true;
+//    }
 
     //Recorder
     private boolean prepareVideoRecorder() {
@@ -186,12 +262,27 @@ public class ShortVideoDialog extends DialogFragment {
         mMediaRecorder = new MediaRecorder();
         mCameraPreview.getCamera().unlock();
         mMediaRecorder.setCamera(mCameraPreview.getCamera());
+//        //声音
+//        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+//        //视频
+//        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         //声音
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
+        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
         //视频
-        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-        //设置分辨率为480P
-        mMediaRecorder.setProfile(CamcorderProfile.get(quality));
+        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
+
+        // TODO: 2016/10/20  设置视频格式
+        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+//        mMediaRecorder.setVideoSize(videoWidth, videoHeight);
+        //每秒的帧数
+        mMediaRecorder.setVideoFrameRate(24);
+        //编码格式
+        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
+        mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        // 设置帧频率，然后就清晰了
+        mMediaRecorder.setVideoEncodingBitRate(1 * 1024 * 1024 * 100);
+//        //设置分辨率为480P
+//        mMediaRecorder.setProfile(CamcorderProfile.get(quality));
         //路径
         mMediaRecorder.setOutputFile(getOutputMediaFile().toString());
         mMediaRecorder.setPreviewDisplay(mCameraPreview.getHolder().getSurface());
@@ -218,7 +309,7 @@ public class ShortVideoDialog extends DialogFragment {
             mMediaRecorder.reset();   // clear recorder configuration
             mMediaRecorder.release(); // release the recorder object
             mMediaRecorder = null;
-            if (mCameraPreview.getCamera()!= null){
+            if (mCameraPreview.getCamera() != null) {
                 mCameraPreview.getCamera().lock();           // lock camera for later use
             }
             if (isLongEnough()) {
@@ -226,7 +317,7 @@ public class ShortVideoDialog extends DialogFragment {
             } else {
                 Toast.makeText(getContext(), "录制过短，请重试", Toast.LENGTH_SHORT).show();
             }
-            disMissDialog();
+//            disMissDialog();
         }
     }
 
@@ -290,6 +381,12 @@ public class ShortVideoDialog extends DialogFragment {
         Log.i("filePath", fileName);
         return new File(fileName);
     }
+
+    public void setAnimStyle(@StyleRes int animStyle) {
+        this.animStyle = animStyle;
+
+    }
+
 
     //interface
     public static interface VideoCallback {

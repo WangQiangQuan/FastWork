@@ -17,7 +17,12 @@
         </activity>
         <activity android:name=".mvp.MVPActivity" />
         <activity android:name=".activity.VGHActivity" />
-        <activity android:name=".activity.ListActivity"></activity>
+        <activity android:name=".activity.ListActivity" />
+        <activity android:name=".permissions.PermissionActivity" />
+        <activity
+            android:name=".activity.ListFengActivity"
+            android:label="@string/title_activity_list_feng"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

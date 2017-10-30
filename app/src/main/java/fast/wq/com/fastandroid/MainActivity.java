@@ -1,9 +1,17 @@
 package fast.wq.com.fastandroid;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -12,13 +20,13 @@ import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
 
+import fast.wq.com.fastandroid.activity.ListFengActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
@@ -53,14 +61,20 @@ public class MainActivity extends AppCompatActivity {
 //       String url= StringUtils.getPageName("http://downloadb.dewmobile.net/z/qiangjing13.apk");
 //        Log.i("wang",url);
 
-        image = (ImageView) findViewById(R.id.image);
-        image.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                openView(mPath);
-            }
-        });
+//        image = (ImageView) findViewById(R.id.image);
+//        image.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                if (TextUtils.isEmpty(mPath)) {
+////                    go2ShortVideo();
+//                    autoObtainCameraPermission();
+//                } else {
+//                    openView(mPath);
+//                }
+//
+//            }
+//        });
 //        BitmapUtils.calScleType(image,98,74,200,200);
 //        image.setImageResource(R.drawable.test);
 
@@ -79,14 +93,21 @@ public class MainActivity extends AppCompatActivity {
 //
 //        Intent mintent = new Intent(this, VGHActivity.class);
 //        Intent mintent = new Intent(this, ListActivity.class);
-//        this.startActivity(mintent);
+        Intent mintent = new Intent(this, ListFengActivity.class);
+        this.startActivity(mintent);
 
 //        CountDownLatchUtils.go();
 
 //        CyclicBarrierUtils.go();
 
 //        setCoins(920);
-        go2ShortVideo();
+
+//        Intent mintent = new Intent(this, PermissionActivity.class);
+//        this.startActivity(mintent);
+
+
+
+
     }
 
     private void setCoins(int coins) {
@@ -112,19 +133,19 @@ public class MainActivity extends AppCompatActivity {
 //        mTvTotalCoins.setText(DmSpannableUtils.setTextForeground(formattedStr, startIndex, endIndex, getResources().getColor(R.color.bean_item_positive_color)));
     }
 
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mStartX = ev.getRawX();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                mStopX = ev.getRawX();
-                mdynamicView.updateView(mStartX, mStopX);
-                break;
-        }
-        return super.dispatchTouchEvent(ev);
-    }
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        switch (ev.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                mStartX = ev.getRawX();
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                mStopX = ev.getRawX();
+//                mdynamicView.updateView(mStartX, mStopX);
+//                break;
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
 
     BadgeChangedListener mListener = new BadgeChangedListener() {
 
@@ -170,9 +191,17 @@ public class MainActivity extends AppCompatActivity {
                 Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(path, MediaStore.Video.Thumbnails.MINI_KIND);
                 image.setImageBitmap(bitmap);
 //                first.setText(getFileSize(path));
+
+                scanFile(MainActivity.this, mPath);
             }
-        }, ShortVideoDialog.Q1080, MainActivity.this);
+        }, ShortVideoDialog.Q480, MainActivity.this,R.style.EnterExitAnimation);
     }
+    public void scanFile(Context context, String filePath) {
+        Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        scanIntent.setData(Uri.fromFile(new File(filePath)));
+        context.sendBroadcast(scanIntent);
+    }
+
 
     public void openView(String path) {
         if (TextUtils.isEmpty(path)) {
@@ -181,5 +210,38 @@ public class MainActivity extends AppCompatActivity {
         }
         File file = new File(path);
         Utils.openFile(file, this);
+    }
+
+    /**
+     * 自动获取相机权限
+     */
+    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
+
+    private void autoObtainCameraPermission() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
+//                ToastUtils.showShort(this, "您已经拒绝过一次");
+            }
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO}, CAMERA_PERMISSIONS_REQUEST_CODE);
+        } else {//有权限直接调用系统相机拍照
+            go2ShortVideo();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode){
+            case  CAMERA_PERMISSIONS_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    go2ShortVideo();
+                }
+                break;
+        }
     }
 }
