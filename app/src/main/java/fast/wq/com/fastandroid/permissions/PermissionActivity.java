@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import fast.wq.com.fastandroid.R;
+import fast.wq.com.fastandroid.bean.SClass;
 
 /**
  * http://blog.csdn.net/yanzhenjie1003/article/details/52503533/
@@ -30,7 +31,16 @@ public class PermissionActivity extends Activity {
         setContentView(R.layout.activity_permission);
 
 //        checkAndIntent();
+        getmyIntent();
         miuiCheak();
+    }
+    private void getmyIntent(){
+        Intent intent = getIntent();
+        Bundle bun = intent.getExtras();
+//        pClass bean = bun.getParcelable("bean");
+       // ListBean bean = bun.getParcelable("bean");
+        SClass bean = bun.getParcelable("bean");
+        Log.i("wang", "getmyIntent() called = "+ bean.sName +" ／／／" +bean.name);
     }
 
     private void checkAndIntent() {

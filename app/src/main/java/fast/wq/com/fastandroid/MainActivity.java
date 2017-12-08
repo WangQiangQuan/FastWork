@@ -1,10 +1,14 @@
 package fast.wq.com.fastandroid;
 
 import android.Manifest;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,14 +29,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.ListFengActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
+import fast.wq.com.fastandroid.bean.ListBean;
+import fast.wq.com.fastandroid.bean.SClass;
+import fast.wq.com.fastandroid.bean.pClass;
+import fast.wq.com.fastandroid.permissions.PermissionActivity;
+import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
+import fast.wq.com.fastandroid.utils.StringUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
+import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTvTotalCoins = (TextView) findViewById(R.id.total_zapya);
-
+        xuli();
 //        String result = getArgUrl(GS_HOME_RES_RECORD_URL,"1");
 //        Log.d(TAG, "onCreate() called with: result = [" + result + "]");
 
@@ -93,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //        Intent mintent = new Intent(this, VGHActivity.class);
 //        Intent mintent = new Intent(this, ListActivity.class);
-        Intent mintent = new Intent(this, ListFengActivity.class);
-        this.startActivity(mintent);
+//        Intent mintent = new Intent(this, ListFengActivity.class);
+//        this.startActivity(mintent);
 
 //        CountDownLatchUtils.go();
 
@@ -106,8 +121,52 @@ public class MainActivity extends AppCompatActivity {
 //        this.startActivity(mintent);
 
 
+//        String a = "111";
+//        String b = "true";
+//        Long.parseLong(b);
+
+//        test();
+//        jobserver();
+
+        String wh = "100x145";
+       Point m = StringUtils.parseWh(wh);
+        Log.i("wang", "onCreate: ="+m.x+"//"+m.y);
+
+        float rate = Utils.getRate(m.x,m.y);
+        int height = Utils.getRateHeight(this,rate);
+        Log.i("wang", "onCreate: height="+height);
 
 
+        int a = 7;
+        int b =3;
+        Log.i("wang", "onCreate:  ="+( a | b));
+
+    }
+    public ExecutorService mSingleExecutor ;
+    private int a = 0;
+    public void test(){
+        mSingleExecutor =  Executors.newFixedThreadPool(1);
+        for (int i=0;i<20;i++){
+            if ( mSingleExecutor.isShutdown()){
+                return;
+            }
+            mSingleExecutor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    if (isFinishing()){
+                        return;
+                    }
+                    Log.i("wang", "run() called = "+a+" "+System.currentTimeMillis());
+                    try {
+                        a++;
+                        Thread.sleep(600);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Log.i("wang", "run() called finish = "+a+" "+System.currentTimeMillis());
+                }
+            });
+        }
     }
 
     private void setCoins(int coins) {
@@ -243,5 +302,79 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    public LinkedHashMap<Integer, ArrayList<DmRecommend>> dataMap = new LinkedHashMap<Integer, ArrayList<DmRecommend>>();
+    final long awaitTime = 5 * 1000;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        try{
+            mSingleExecutor.shutdown();
+            if(!mSingleExecutor.awaitTermination(awaitTime, TimeUnit.MILLISECONDS)){
+                // 超时的时候向线程池中所有的线程发出中断(interrupted)。
+                mSingleExecutor.shutdownNow();
+            }
+        }catch (Exception e){
+
+        }
+
+    }
+
+    private int mJobId = 0;
+    private void jobserver(){
+        JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        ComponentName componentName = new ComponentName(MainActivity.this, MyJobService.class);
+        JobInfo.Builder builder = new JobInfo.Builder(++mJobId, componentName);
+
+        //设置JobService执行的最小延时时间
+//        builder.setMinimumLatency(Long.valueOf("5") * 1000);
+        //设置JobService执行的最晚时间
+        builder.setOverrideDeadline(Long.valueOf("10") * 1000);
+
+        boolean requiresUnmetered = false;
+        boolean requiresAnyConnectivity =false;
+        if (requiresUnmetered) {
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
+        } else if (requiresAnyConnectivity) {
+            builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
+        }
+
+        builder.setPeriodic(1000);//可以每隔1秒运行一次。
+        builder.setPersisted(true);//这个方法告诉系统当你的设备重启之后你的任务是否还要继续执行。
+//        builder.setRequiresDeviceIdle(true);//是否要求设备为idle状态
+//        builder.setRequiresCharging(false);//是否要设备为充电状态
+
+        scheduler.schedule(builder.build());
+    }
+
+    private void xuli(){
+//        //序列化到本地
+//        User user=new User(0,"wcl_android@163.com","123456");
+//        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("user.obj"));
+//        out.writeObject(user);
+//        out.close;
+//
+////反序列化
+//        ObjectInputStream in=new ObjectInputStream(new FileInputStream("user.obj"));
+//        User user=(User)in.readObject();
+//        in.close();
+
+        pClass m = new pClass();
+        m.name = "名字";
+        ListBean bean = new ListBean();
+        bean.setName("名字");
+        SClass ms = new SClass();
+        ms.sName = "子类名字";
+        ms.name = "父名字";
+
+        Bundle bundle = new Bundle();
+//        bundle.putParcelable("bean", m);
+//        bundle.putParcelable("bean", bean);
+        bundle.putParcelable("bean", ms);
+        Intent intent = new Intent(MainActivity.this,PermissionActivity.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 }

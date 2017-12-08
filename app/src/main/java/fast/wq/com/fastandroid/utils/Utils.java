@@ -3,6 +3,7 @@ package fast.wq.com.fastandroid.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.net.Uri;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
@@ -40,6 +41,20 @@ public class Utils {
         TextPaint paint = textView.getPaint();
         paint.setTextSize(textSize);
         return paint.measureText(textView.getText().toString());
+    }
+
+    public static int getRateHeight(Context context,float rate){
+        int width = getScreenWidth(context);
+        return (int)( width/rate);
+    }
+
+    public static Point getFullScreenWh(Context context, float rate){
+        int width = getScreenWidth(context);
+        int height = (int)( width/rate);
+        return new Point(width,height) ;
+    }
+    public static float getRate(int width,int height){
+        return ( (float)width/height);
     }
 
     /**

@@ -6,7 +6,7 @@ package fast.wq.com.fastandroid.bean;
 
 public class ListBean {
     int type;
-    String name;
+   public String name;
     String value;
 
     public int getType() {

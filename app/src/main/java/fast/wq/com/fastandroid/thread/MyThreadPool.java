@@ -35,6 +35,7 @@ public class MyThreadPool {
     public static final MyThreadFactory threadFactory = new MyThreadFactory();
     public static final MyThreadLowFactory threadFactoryLow = new MyThreadLowFactory();
 
+
     /** High level Thread pool executor eg: access Internet and response interacts with UI*/
     public static ExecutorService EXECUTOR = new ThreadPoolExecutor(1, 4, 30L, TimeUnit.SECONDS,
             new LinkedBlockingQueue<Runnable>(), threadFactory);
