@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,6 +34,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fast.wq.com.fastandroid.activity.ListActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -43,7 +43,6 @@ import fast.wq.com.fastandroid.bean.pClass;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
-import fast.wq.com.fastandroid.utils.StringUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
@@ -107,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
 //        list.cauclate();
 //
 //        Intent mintent = new Intent(this, VGHActivity.class);
-//        Intent mintent = new Intent(this, ListActivity.class);
+        Intent mintent = new Intent(this, ListActivity.class);
 //        Intent mintent = new Intent(this, ListFengActivity.class);
-//        this.startActivity(mintent);
+        this.startActivity(mintent);
 
 //        CountDownLatchUtils.go();
 
@@ -128,18 +127,18 @@ public class MainActivity extends AppCompatActivity {
 //        test();
 //        jobserver();
 
-        String wh = "100x145";
-       Point m = StringUtils.parseWh(wh);
-        Log.i("wang", "onCreate: ="+m.x+"//"+m.y);
-
-        float rate = Utils.getRate(m.x,m.y);
-        int height = Utils.getRateHeight(this,rate);
-        Log.i("wang", "onCreate: height="+height);
-
-
-        int a = 7;
-        int b =3;
-        Log.i("wang", "onCreate:  ="+( a | b));
+//        String wh = "100x145";
+//       Point m = StringUtils.parseWh(wh);
+//        Log.i("wang", "onCreate: ="+m.x+"//"+m.y);
+//
+//        float rate = Utils.getRate(m.x,m.y);
+//        int height = Utils.getRateHeight(this,rate);
+//        Log.i("wang", "onCreate: height="+height);
+//
+//
+//        int a = 7;
+//        int b =3;
+//        Log.i("wang", "onCreate:  ="+( a | b));
 
     }
     public ExecutorService mSingleExecutor ;

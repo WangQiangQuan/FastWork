@@ -25,6 +25,11 @@ public class LazyFragment extends ALazyFragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     protected void lazyLoad() {
         if (isCanLoad()) {
 
