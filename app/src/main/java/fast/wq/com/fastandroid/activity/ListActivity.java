@@ -22,6 +22,7 @@ import fast.wq.com.fastandroid.adapter.ListAdapter;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.view.desin.CustomProgressDrawable;
 import fast.wq.com.fastandroid.view.desin.CustomSwipeRefreshLayout;
+import fast.wq.com.fastandroid.view.desin.DmSwipeRefreshLayout;
 import fast.wq.com.fastandroid.view.recyclerview.decoration.DividerItemDecoration;
 
 public class ListActivity extends Activity {
@@ -33,14 +34,55 @@ public class ListActivity extends Activity {
     private ListAdapter mAdapter;
 
     private CustomSwipeRefreshLayout mCustomSwipeRefreshLayout;
+    private DmSwipeRefreshLayout mDmSwipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initCustom();
+//        initCustom();
 //        initNotmal();
 
+        initDm();
+    }
+    private void initDm(){
+        setContentView(R.layout.activity_dm_list);
+        initData();
 
+        mDmSwipeRefreshLayout= findViewById(R.id.sr_refresh);
+        mDmSwipeRefreshLayout.setColorSchemeResources(R.color.player_seekbar_progressb);
+        mDmSwipeRefreshLayout.setOnRefreshListener(new DmSwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mDmSwipeRefreshLayout.setRefreshing(true);
+//                mLists.clear();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            stopRefreshing();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
+
+        Log.d("wang", "initDm() called"+(mDmSwipeRefreshLayout == null));
+        CustomProgressDrawable drawable = new CustomProgressDrawable(this,mDmSwipeRefreshLayout);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.dmloading);
+        drawable.setBitmap(bitmap);
+        mDmSwipeRefreshLayout.setProgressView(drawable);
+
+        mRecyclerView = findViewById(R.id.listview);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        mAdapter = new ListAdapter(this,mLists);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST));
     }
     private void initCustom(){
         setContentView(R.layout.activity_custm_list);
@@ -131,6 +173,9 @@ public class ListActivity extends Activity {
 
                 if (mCustomSwipeRefreshLayout!= null){
                     mCustomSwipeRefreshLayout.setRefreshing(false);
+                }
+                if (mDmSwipeRefreshLayout!=null){
+                    mDmSwipeRefreshLayout.setRefreshing(false);
                 }
 
             }

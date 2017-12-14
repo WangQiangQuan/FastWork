@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -34,7 +35,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.ListActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -50,7 +50,7 @@ import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "wqqq";
 
 
     TaskLinerLayout mtaskLinerlayout;
@@ -106,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
 //        list.cauclate();
 //
 //        Intent mintent = new Intent(this, VGHActivity.class);
-        Intent mintent = new Intent(this, ListActivity.class);
+//        Intent mintent = new Intent(this, ListActivity.class);
 //        Intent mintent = new Intent(this, ListFengActivity.class);
-        this.startActivity(mintent);
+//        this.startActivity(mintent);
 
 //        CountDownLatchUtils.go();
 
@@ -139,8 +139,48 @@ public class MainActivity extends AppCompatActivity {
 //        int a = 7;
 //        int b =3;
 //        Log.i("wang", "onCreate:  ="+( a | b));
-
+        startTask();
     }
+    Object obj = new Object();
+    private void startTask(){
+
+        new AsyncTask<Void,Void,Void>(){
+
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Log.d(TAG, "doInBackground() called with: voids = [" + voids + "]");
+
+
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Thread.sleep(3000);
+                                Log.d(TAG, "notify() called with: voids = ["  + "]");
+                                obj.notifyAll();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+
+                    try {
+                        Log.d(TAG, "wait() called with: voids = ["  + "]");
+                        obj.wait();
+
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d(TAG, "end() called with: voids = [" + voids + "]");
+                    return null;
+
+
+            }
+        }.execute();
+    }
+
     public ExecutorService mSingleExecutor ;
     private int a = 0;
     public void test(){
