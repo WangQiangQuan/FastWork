@@ -416,4 +416,19 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(intent);
     }
+
+
+    /**
+     * 1scrollerY < 1280 开始滑动
+     * 2滑动距离 大于BottomHeight ,全部显示了。
+     * 3
+     * @param scrollerY  目标线的高度
+     */
+    int Sceenheight = 1280;
+    int lineHeight = 1300;
+    int BottomHeight = 40;
+    private void scroller(int scrollerY){
+
+
+    }
 }

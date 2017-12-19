@@ -33,7 +33,12 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name=".activity.WaterFallActivity"></activity>
+        <activity android:name=".activity.WaterFallActivity" />
+        <activity android:name=".activity.CooBeaverActivity" />
+        <activity
+            android:name=".activity.AnimationActivity"
+            android:label="@string/title_activity_animation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
