@@ -35,6 +35,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fast.wq.com.fastandroid.activity.AnimationActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTvTotalCoins = (TextView) findViewById(R.id.total_zapya);
-        xuli();
+//        xuli();
 //        String result = getArgUrl(GS_HOME_RES_RECORD_URL,"1");
 //        Log.d(TAG, "onCreate() called with: result = [" + result + "]");
 
@@ -117,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
 //        setCoins(920);
 
 //        Intent mintent = new Intent(this, PermissionActivity.class);
-//        this.startActivity(mintent);
+        Intent mintent = new Intent(this, AnimationActivity.class);
+        this.startActivity(mintent);
 
 
 //        String a = "111";
@@ -139,7 +141,9 @@ public class MainActivity extends AppCompatActivity {
 //        int a = 7;
 //        int b =3;
 //        Log.i("wang", "onCreate:  ="+( a | b));
-        startTask();
+//        startTask();
+
+
     }
     Object obj = new Object();
     private void startTask(){

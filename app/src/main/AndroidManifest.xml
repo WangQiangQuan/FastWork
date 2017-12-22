@@ -38,7 +38,9 @@
         <activity
             android:name=".activity.AnimationActivity"
             android:label="@string/title_activity_animation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.CustomToActivity"
+            android:theme="@style/CustomAppTheme3"></activity>
     </application>
 
 </manifest>

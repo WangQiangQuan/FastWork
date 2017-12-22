@@ -10,5 +10,6 @@
        android:id="@+id/image"
        android:layout_width="100dp"
        android:layout_height="200dp"
+       android:transitionName="wangq"
        android:background="@drawable/dmloading"/>
 </RelativeLayout>
