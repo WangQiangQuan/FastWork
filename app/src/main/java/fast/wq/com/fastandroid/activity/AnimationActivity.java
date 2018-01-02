@@ -39,6 +39,7 @@ public class AnimationActivity extends Activity {
 //                scale(mImageView);
 //                scaleThumbnail(mImageView);
                 makeSceneTransitionAnimation(view);
+//                go();
             }
         });
     }
@@ -81,6 +82,18 @@ public class AnimationActivity extends Activity {
 
         Intent mIntent = new Intent(this, CustomToActivity.class);
         ActivityCompat.startActivity(this, mIntent, compat.toBundle());
+    }
+
+    /**
+     * -------
+     */
+    private void go(){
+        startActivity(new Intent(this,CustomT2Activity.class));
+//        overridePendingTransition(R.anim.ac_enter_anim,0);
+        overridePendingTransition(R.anim.ac_enter_anim_tr,0);
+//        overridePendingTransition(R.anim.ac_enter_anim,0);
+//        overridePendingTransition(R.anim.ac_enter_anim,0);
+//        overridePendingTransition(R.anim.ac_enter_anim,0);
     }
 
 }
