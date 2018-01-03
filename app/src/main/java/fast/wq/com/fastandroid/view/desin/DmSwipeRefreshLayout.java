@@ -918,6 +918,8 @@ public class DmSwipeRefreshLayout extends ViewGroup implements NestedScrollingPa
 
         float rotation = (-0.25f + .4f * adjustedPercent + tensionPercent * 2) * .5f;
         mProgress.setProgressRotation(rotation);
+
+        Log.d("wang", "moveSpinner() called with: mTotalDragDistance = [" + mTotalDragDistance + "]"+"slingshotDist="+slingshotDist+"targetY="+targetY);
         setTargetOffsetTopAndBottom(targetY - mCurrentTargetOffsetTop);
     }
 

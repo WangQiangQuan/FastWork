@@ -3,6 +3,7 @@
     package="fast.wq.com.fastandroid">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -39,7 +40,15 @@
             android:name=".activity.AnimationActivity"
             android:label="@string/title_activity_animation"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.GlideActivity"></activity>
+        <activity
+            android:name=".activity.CustomToActivity"
+            android:theme="@style/CustomAppTheme" />
+        <activity
+            android:name=".activity.CustomT2Activity"
+            android:label="@string/title_activity_custom_t2"
+            android:theme="@style/CustomACAppTheme" />
+        <activity android:name=".activity.CooderatorLayoutActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

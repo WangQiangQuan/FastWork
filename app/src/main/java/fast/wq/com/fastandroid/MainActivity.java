@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -29,12 +30,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fast.wq.com.fastandroid.activity.CooderatorLayoutActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -64,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTvTotalCoins = (TextView) findViewById(R.id.total_zapya);
-        xuli();
+//        xuli();
 //        String result = getArgUrl(GS_HOME_RES_RECORD_URL,"1");
 //        Log.d(TAG, "onCreate() called with: result = [" + result + "]");
 
@@ -117,7 +125,10 @@ public class MainActivity extends AppCompatActivity {
 //        setCoins(920);
 
 //        Intent mintent = new Intent(this, PermissionActivity.class);
-//        this.startActivity(mintent);
+//        Intent mintent = new Intent(this, AnimationActivity.class);
+        Intent mintent = new Intent(this, CooderatorLayoutActivity.class);
+
+        this.startActivity(mintent);
 
 
 //        String a = "111";
@@ -139,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
 //        int a = 7;
 //        int b =3;
 //        Log.i("wang", "onCreate:  ="+( a | b));
-        startTask();
+//        startTask();
+//        task();
+
     }
     Object obj = new Object();
     private void startTask(){
@@ -429,6 +442,94 @@ public class MainActivity extends AppCompatActivity {
     int BottomHeight = 40;
     private void scroller(int scrollerY){
 
+
+    }
+
+
+    private void task(){
+
+//        Task mTask = new Task();
+//        mTask.execute();
+        load();
+    }
+    public class Task extends AsyncTask<Void,Void,Void>{
+        private  CountDownLatch latch ;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            latch = new CountDownLatch(3);
+            createTHread(latch,200);
+//            createTHread(latch,500);
+//            createTHread(latch,1000);
+            try {
+                latch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            Log.i("wang", "onPostExecute: end");
+            super.onPostExecute(aVoid);
+        }
+    }
+    private void createTHread(final CountDownLatch latch,final  int time){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(time);
+                    Log.i("wang", "onPostExecute: time"+time);
+                    latch.countDown();
+                    Thread.sleep(time);
+                    Log.i("wang", "onPostExecute: time"+time);
+                    latch.countDown();
+                    Thread.sleep(time);
+                    Log.i("wang", "onPostExecute: time"+time);
+                    latch.countDown();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    String url = "http://f.kuaiya.cn/5b1c35a31b7160671aae9d638899ef14.jpg?e=1514876642&token=rQ7At7jVvB9Y5MUc9YfG7C8pEkCJH6ZWgHuEVZNH:TOortYSAHP_jlBU4wlW8uug3yJI=";
+    private void load(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                URL aURL = null;
+                try {
+                    aURL = new URL(url);
+                    URLConnection conn = aURL.openConnection();
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    int totalLen = conn.getContentLength();
+                  Bitmap bm=  BitmapFactory.decodeStream(is);
+                    bit(bm);
+                    Log.i("wang", "run: bm="+bm);
+                } catch (MalformedURLException e) {
+                    Log.i("wang", "run1: e="+e);
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    Log.i("wang", "run:2 e="+e);
+                    e.printStackTrace();
+                }
+
+            }
+        }).start();
+    }
+
+    public void bit(final Bitmap bitmap){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ImageView image =   (ImageView)findViewById(R.id.image);
+                image.setImageBitmap(bitmap);
+            }
+        });
 
     }
 }
