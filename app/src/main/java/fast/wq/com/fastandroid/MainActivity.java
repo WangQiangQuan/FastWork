@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -42,7 +43,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.CooderatorLayoutActivity;
+import fast.wq.com.fastandroid.activity.AnimationActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -125,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
 //        setCoins(920);
 
 //        Intent mintent = new Intent(this, PermissionActivity.class);
-//        Intent mintent = new Intent(this, AnimationActivity.class);
-        Intent mintent = new Intent(this, CooderatorLayoutActivity.class);
+        Intent mintent = new Intent(this, AnimationActivity.class);
+//        Intent mintent = new Intent(this, CooderatorLayoutActivity.class);
 
         this.startActivity(mintent);
 
@@ -530,6 +531,11 @@ public class MainActivity extends AppCompatActivity {
                 image.setImageBitmap(bitmap);
             }
         });
+
+    }
+
+
+    public void setSwipeBackFactor(@FloatRange(from = 0.0f, to = 1.0f) float swipeBackFactor) {
 
     }
 }
