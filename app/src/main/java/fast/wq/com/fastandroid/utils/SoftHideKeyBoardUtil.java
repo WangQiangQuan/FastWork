@@ -28,7 +28,7 @@ public class SoftHideKeyBoardUtil {
         FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
         //2､获取到setContentView放进去的View
         mChildOfContent = content.getChildAt(0);
-        statusBarHeight = Utils.getStatusBarHeight(activity);
+//        statusBarHeight = Utils.getStatusBarHeight(activity);
         //3､给Activity的xml布局设置View树监听，当布局有变化，如键盘弹出或收起时，都会回调此监听
         mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             //4､软键盘弹起会使GlobalLayout发生变化

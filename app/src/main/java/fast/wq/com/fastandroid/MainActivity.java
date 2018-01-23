@@ -37,18 +37,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.AnimationActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
+import fast.wq.com.fastandroid.detialsview.MainViewActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
@@ -126,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
 //        setCoins(920);
 
 //        Intent mintent = new Intent(this, PermissionActivity.class);
-        Intent mintent = new Intent(this, AnimationActivity.class);
+//        Intent mintent = new Intent(this, AnimationActivity.class);
 //        Intent mintent = new Intent(this, CooderatorLayoutActivity.class);
 
-        this.startActivity(mintent);
+//        this.startActivity(mintent);
 
 
 //        String a = "111";
@@ -154,7 +155,39 @@ public class MainActivity extends AppCompatActivity {
 //        startTask();
 //        task();
 
+
+//        SpUtil.saveToLocal(this,"user","key","value");
+//        String url =  SpUtil.getFromLocal(this,"user","key","");
+//        Log.i("wang",url);
+//        ArrayList<String> durls = new ArrayList<>();
+//        durls.add("skjflajfla");
+//
+//        BaiduADBean bean = new BaiduADBean("pkg","name",durls,null,null);
+//        Gson mGson = new Gson();
+//       String json =  mGson.toJson(bean);
+//        Log.i("wang", "onCreate: json = "+json);
+//
+//        SpUtil.saveToLocal(this,"user","key",json);
+//        url =  SpUtil.getFromLocal(this,"user","key","");
+//
+//        BaiduADBean newBean = mGson.fromJson(url,BaiduADBean.class);
+//        Log.i("wang", "onCreate: json = "+newBean.getPkg()+"ddd="+newBean.getUrl());
+
+//        mClicklimitMap = new HashMap<>();
+//
+//
+//        String key = "key";
+//        int times = mClicklimitMap.get(key);
+//        Log.i("wang", "onCreate: times"+times);
+
+
+        Intent mintent = new Intent(this, MainViewActivity.class);
+        this.startActivity(mintent);
     }
+
+    private HashMap<String,Integer> mClicklimitMap;
+    private int limiteClickSize = 3;
+
     Object obj = new Object();
     private void startTask(){
 

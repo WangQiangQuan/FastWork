@@ -6,7 +6,8 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.dewmobile.kuaiya.swipeback.tools.Util;
+import fast.wq.com.fastandroid.view.swiplayout.tools.Util;
+
 
 public class WxSwipeBackLayout extends SwipeBackLayout {
     
