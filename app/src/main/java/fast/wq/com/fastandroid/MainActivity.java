@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent mintent = new Intent(this, MainViewActivity.class);
         this.startActivity(mintent);
+        finish();
     }
 
     private HashMap<String,Integer> mClicklimitMap;

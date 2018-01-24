@@ -12,27 +12,41 @@ import android.view.Window;
  */
 
 public abstract class Page extends ContextWrapper {
+    private Activity mActivity;
 
     public Page(Activity base) {
         super(base);
+        mActivity = base;
+        onCreate();
     }
 
 
     //加入生命周期
 
-    public void onCreate(){
+    public void onCreate() {
+        if (mActivity !=  null){
+            initTouch(mActivity);
+        }
 
     }
 
-    //拦截事件
-
-    private WindowCallbackWrapper mWindowCallbackWrapper;
-    private void initTouch(Activity base){
-        Window.Callback wrapped = base.getWindow().getCallback();
-        if (wrapped == null){
-            wrapped = base;
+    public void onDestroy() {
+        if (mActivity !=  null){
+            giveBack(mActivity);
         }
-        mWindowCallbackWrapper = new WindowCallbackWrapper(wrapped){
+    }
+
+
+    private Window.Callback mOriginalWindowCallback;
+    private WindowCallbackWrapper mWindowCallbackWrapper;
+
+    private void initTouch(Activity base) {
+        Window.Callback mOriginalWindowCallback = base.getWindow().getCallback();
+        if (mOriginalWindowCallback == null) {
+            mOriginalWindowCallback = base;
+        }
+        this.mOriginalWindowCallback = mOriginalWindowCallback;
+        mWindowCallbackWrapper = new WindowCallbackWrapper(mOriginalWindowCallback) {
             @Override
             public boolean dispatchKeyEvent(KeyEvent event) {
                 return Page.this.dispatchKeyEvent(event);
@@ -43,8 +57,15 @@ public abstract class Page extends ContextWrapper {
                 return Page.this.dispatchTouchEvent(event);
             }
         };
+        base.getWindow().setCallback(mWindowCallbackWrapper);
     }
+
+    private void giveBack(Activity base) {
+        base.getWindow().setCallback(mOriginalWindowCallback);
+    }
+
     public abstract boolean dispatchKeyEvent(KeyEvent event);
+
     public abstract boolean dispatchTouchEvent(MotionEvent event);
 
 
