@@ -49,10 +49,10 @@ import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
-import fast.wq.com.fastandroid.detialsview.MainViewActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
+import fast.wq.com.fastandroid.utils.SparseArrayUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
@@ -181,9 +181,12 @@ public class MainActivity extends AppCompatActivity {
 //        Log.i("wang", "onCreate: times"+times);
 
 
-        Intent mintent = new Intent(this, MainViewActivity.class);
-        this.startActivity(mintent);
-        finish();
+//        Intent mintent = new Intent(this, MainViewActivity.class);
+//        this.startActivity(mintent);
+//        finish();
+
+        SparseArrayUtils mutils = new SparseArrayUtils();
+        mutils.test();
     }
 
     private HashMap<String,Integer> mClicklimitMap;
