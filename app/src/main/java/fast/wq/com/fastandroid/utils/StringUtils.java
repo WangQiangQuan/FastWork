@@ -54,4 +54,11 @@ public class StringUtils {
         }
         return m;
     }
+
+    //String、StringBuffer和StringBuilder的区别
+    //而StringBuffer是线程安全的,StringBuilder是线程不安全的
+    public void append(){
+        StringBuilder mStringBuilder=new StringBuilder();
+        mStringBuilder.append("abc").append("de");
+    }
 }

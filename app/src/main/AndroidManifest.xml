@@ -63,8 +63,12 @@
         <activity
             android:name=".activity.CooderatorLayoutActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".detialsview.MainViewActivity"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <activity
+            android:name=".detialsview.MainViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.ClickActivity" />
+        <activity android:name=".activity.ImageViewActivity" />
+        <activity android:name=".view.dispatch.DispatchActivity"></activity>
     </application>
 
 </manifest>

@@ -52,10 +52,10 @@ import fast.wq.com.fastandroid.bean.pClass;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
-import fast.wq.com.fastandroid.utils.SparseArrayUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
+import fast.wq.com.fastandroid.view.dispatch.DispatchActivity;
 import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
@@ -185,8 +185,30 @@ public class MainActivity extends AppCompatActivity {
 //        this.startActivity(mintent);
 //        finish();
 
-        SparseArrayUtils mutils = new SparseArrayUtils();
-        mutils.test();
+//        SparseArrayUtils mutils = new SparseArrayUtils();
+//        mutils.test();
+
+//        for (int i=0;i<10;i++){
+//            int sleep = new Random().nextInt(20) * 1000;
+//            Log.i("wang", "onCreate: sleep="+sleep);
+//        }
+
+
+//        String name = "name";
+//
+//        ParcelableBean mb1 = new ParcelableBean();
+//        SerializableBean mb2 = new SerializableBean();
+//
+//        mb1.name = name;
+//        mb2.setName(name);
+//
+//        Intent mintent = new Intent(this, ImageViewActivity.class);
+//        IntentUtils.putParcelable(mintent,"a",mb1);
+//        IntentUtils.putSerial(mintent,"b",mb2);
+//        this.startActivity(mintent);
+
+        Intent mintent = new Intent(this, DispatchActivity.class);
+        this.startActivity(mintent);
     }
 
     private HashMap<String,Integer> mClicklimitMap;
