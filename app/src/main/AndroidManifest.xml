@@ -68,7 +68,17 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activity.ClickActivity" />
         <activity android:name=".activity.ImageViewActivity" />
-        <activity android:name=".view.dispatch.DispatchActivity"></activity>
+        <activity android:name=".view.dispatch.DispatchActivity" />
+        <activity android:name=".loop.LoopActivity"></activity>
+
+
+        <receiver android:name=".loop.LoopActivity$AlarmReceiver">
+            <intent-filter>
+                <action android:name="intent_alarm_log"/>
+            </intent-filter>
+        </receiver>
+
+
     </application>
 
 </manifest>

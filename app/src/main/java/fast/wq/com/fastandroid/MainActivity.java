@@ -44,19 +44,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.annotations.TestNonNull;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
+import fast.wq.com.fastandroid.loop.LoopActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
-import fast.wq.com.fastandroid.view.dispatch.DispatchActivity;
 import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
@@ -208,12 +207,13 @@ public class MainActivity extends AppCompatActivity {
 //        IntentUtils.putSerial(mintent,"b",mb2);
 //        this.startActivity(mintent);
 
-        Intent mintent = new Intent(this, DispatchActivity.class);
+//        Intent mintent = new Intent(this, DispatchActivity.class);
+        Intent mintent = new Intent(this, LoopActivity.class);
         this.startActivity(mintent);
 
 
 //        TestNonNull.test(TestNonNull.go(0));
-        TestNonNull.test(null);
+//        TestNonNull.test(null);
     }
 
     private HashMap<String,Integer> mClicklimitMap;
