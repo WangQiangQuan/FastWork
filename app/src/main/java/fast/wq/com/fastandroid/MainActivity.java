@@ -44,6 +44,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fast.wq.com.fastandroid.annotations.TestNonNull;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -209,6 +210,10 @@ public class MainActivity extends AppCompatActivity {
 
         Intent mintent = new Intent(this, DispatchActivity.class);
         this.startActivity(mintent);
+
+
+//        TestNonNull.test(TestNonNull.go(0));
+        TestNonNull.test(null);
     }
 
     private HashMap<String,Integer> mClicklimitMap;

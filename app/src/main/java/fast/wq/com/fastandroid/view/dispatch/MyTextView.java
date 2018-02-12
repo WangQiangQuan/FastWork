@@ -39,8 +39,8 @@ public class MyTextView extends TextView{
             default:
                 break;
         }
-//        return super.dispatchTouchEvent(event);
-        return true;
+        return super.dispatchTouchEvent(event);
+//        return true;
     }
 
     @Override
@@ -102,4 +102,7 @@ public class MyTextView extends TextView{
  */
 /**
  * 结论
+ * super. 按从外层到内层顺序执行
+ * true 提前消费，结束
+ * false 处理不了返回给父类处理
  */

@@ -87,3 +87,24 @@ public class MyRelativeLayout extends RelativeLayout {
         return super.onTouchEvent(event);
     }
 }
+
+/**
+ 02-12 10:28:53.616 22792-22792/fast.wq.com.fastandroid I/DispatchActivity: dispatchTouchEvent: ACTION_DOWN
+ 02-12 10:28:53.617 22792-22792/fast.wq.com.fastandroid I/MyRelativeLayout: dispatchTouchEvent: ACTION_DOWN
+ 02-12 10:28:53.617 22792-22792/fast.wq.com.fastandroid I/MyRelativeLayout: onInterceptTouchEvent: ACTION_DOWN
+ 02-12 10:28:53.617 22792-22792/fast.wq.com.fastandroid I/MyTextView: dispatchTouchEvent: ACTION_DOWN
+ 02-12 10:28:53.617 22792-22792/fast.wq.com.fastandroid I/DispatchActivity: onTouch: ACTION_DOWN
+ 02-12 10:28:53.617 22792-22792/fast.wq.com.fastandroid I/MyTextView: onTouchEvent: ACTION_DOWN
+ 02-12 10:28:53.733 22792-22792/fast.wq.com.fastandroid I/DispatchActivity: dispatchTouchEvent: ACTION_UP
+ 02-12 10:28:53.734 22792-22792/fast.wq.com.fastandroid I/MyRelativeLayout: dispatchTouchEvent: ACTION_UP
+ 02-12 10:28:53.734 22792-22792/fast.wq.com.fastandroid I/MyRelativeLayout: onInterceptTouchEvent: ACTION_UP
+ 02-12 10:28:53.734 22792-22792/fast.wq.com.fastandroid I/MyTextView: dispatchTouchEvent: ACTION_UP
+ 02-12 10:28:53.734 22792-22792/fast.wq.com.fastandroid I/DispatchActivity: onTouch: ACTION_UP
+ 02-12 10:28:53.734 22792-22792/fast.wq.com.fastandroid I/MyTextView: onTouchEvent: ACTION_UP
+ 02-12 10:28:53.739 22792-22792/fast.wq.com.fastandroid I/DispatchActivity: onClick:mytv2
+ */
+
+/**
+ * 结论
+ * onInterceptTouchEvent true 拦截
+ */

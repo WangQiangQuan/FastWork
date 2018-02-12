@@ -16,7 +16,7 @@ public class DispatchActivity extends AppCompatActivity implements View.OnClickL
 
     private static final String TAG = "DispatchActivity";
 
-    private TextView myTextview;
+    private TextView myTextview,myTv2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +25,10 @@ public class DispatchActivity extends AppCompatActivity implements View.OnClickL
         myTextview = findViewById(R.id.mytv);
         myTextview.setOnClickListener(this);
         myTextview.setOnTouchListener(this);
+
+        myTv2 = findViewById(R.id.mytv2);
+        myTv2.setOnClickListener(this);
+        myTv2.setOnTouchListener(this);
     }
 
     @Override
@@ -32,6 +36,9 @@ public class DispatchActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.mytv:
                 Log.i(TAG, "onClick: ");
+                break;
+            case R.id.mytv2:
+                Log.i(TAG, "onClick:mytv2 ");
                 break;
             default:
                 break;
@@ -42,6 +49,25 @@ public class DispatchActivity extends AppCompatActivity implements View.OnClickL
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch (view.getId()) {
             case R.id.mytv:
+                switch (motionEvent.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        Log.i(TAG, "onTouch: ACTION_DOWN");
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        Log.i(TAG, "onTouch: ACTION_MOVE");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        Log.i(TAG, "onTouch: ACTION_UP");
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                        Log.i(TAG, "onTouch: ACTION_CANCEL");
+                        break;
+                    default:
+                        break;
+                }
+                break;
+
+            case R.id.mytv2:
                 switch (motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
                         Log.i(TAG, "onTouch: ACTION_DOWN");
