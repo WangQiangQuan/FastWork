@@ -49,7 +49,7 @@ import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
-import fast.wq.com.fastandroid.loop.LoopActivity;
+import fast.wq.com.fastandroid.glide.GlideActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
@@ -208,7 +208,9 @@ public class MainActivity extends AppCompatActivity {
 //        this.startActivity(mintent);
 
 //        Intent mintent = new Intent(this, DispatchActivity.class);
-        Intent mintent = new Intent(this, LoopActivity.class);
+//        Intent mintent = new Intent(this, LoopActivity.class);
+        Intent mintent = new Intent(this, GlideActivity.class);
+
         this.startActivity(mintent);
 
 
