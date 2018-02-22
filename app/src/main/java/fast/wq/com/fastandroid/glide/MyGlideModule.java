@@ -11,6 +11,9 @@ import com.bumptech.glide.module.GlideModule;
 
 import java.io.InputStream;
 
+import fast.wq.com.fastandroid.glide.progress.ProgressInterceptor;
+import okhttp3.OkHttpClient;
+
 /**
  * 自定义模块的基本用法
  * 这两个方法分别就是用来更改Glide和配置以及替换Glide组件的
@@ -27,6 +30,7 @@ public class MyGlideModule implements GlideModule {
         builder.setDiskCache(new ExternalCacheDiskCacheFactory(context,DISK_CACHE_SIZE));
         //图片质量变好了，但同时内存开销也会明显增大
         builder.setDecodeFormat(DecodeFormat.PREFER_ARGB_8888);
+//        builder.setDiskCache(new DiskLruCacheFactory(downloadDirectoryPath, DISK_CACHE_SIZE));
     }
 
     //替换Glide组件
@@ -34,6 +38,12 @@ public class MyGlideModule implements GlideModule {
     @Override
     public void registerComponents(Context context, Glide glide) {
         glide.register(GlideUrl.class, InputStream.class, new OkHttpGlideUrlLoader.Factory());
+
+        //使用拦截器
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(new ProgressInterceptor());
+        OkHttpClient okHttpClient = builder.build();
+        glide.register(GlideUrl.class, InputStream.class, new OkHttpGlideUrlLoader.Factory(okHttpClient));
     }
 }
 /**
