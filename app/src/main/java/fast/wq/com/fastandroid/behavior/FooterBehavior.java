@@ -1,7 +1,6 @@
 package fast.wq.com.fastandroid.behavior;
 
 import android.content.Context;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
@@ -25,18 +24,17 @@ public class FooterBehavior extends CoordinatorLayout.Behavior<View>{
     /**
      * 方式1
      */
-    @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
-        return dependency instanceof AppBarLayout;
-    }
-
-    @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
-//        return super.onDependentViewChanged(parent, child, dependency);
-        float scaleY = Math.abs(dependency.getY()) / dependency.getHeight();
-        child.setTranslationY(child.getHeight() * scaleY);
-        return true;
-    }
+//    @Override
+//    public boolean layoutDependsOn(CoordinatorLayout parent, View child, View dependency) {
+//        return dependency instanceof AppBarLayout;
+//    }
+//
+//    @Override
+//    public boolean onDependentViewChanged(CoordinatorLayout parent, View child, View dependency) {
+//        float scaleY = Math.abs(dependency.getY()) / dependency.getHeight();
+//        child.setTranslationY(child.getHeight() * scaleY);
+//        return true;
+//    }
 
 
     /**

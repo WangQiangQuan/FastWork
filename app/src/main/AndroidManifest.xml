@@ -5,12 +5,32 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Notification -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Phone -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- SDCard -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- New UI -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- 让Glide 识别我们自定义的MyGlideModule -->
+        <meta-data
+            android:name="fast.wq.com.fastandroid.glide.MyGlideModule"
+            android:value="GlideModule" />
+
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,8 +67,24 @@
             android:name=".activity.CustomT2Activity"
             android:label="@string/title_activity_custom_t2"
             android:theme="@style/CustomACAppTheme" />
-        <activity android:name=".activity.CooderatorLayoutActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.CooderatorLayoutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".detialsview.MainViewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.ClickActivity" />
+        <activity android:name=".activity.ImageViewActivity" />
+        <activity android:name=".view.dispatch.DispatchActivity" />
+        <activity android:name=".loop.LoopActivity" />
+
+        <receiver android:name=".loop.LoopActivity$AlarmReceiver">
+            <intent-filter>
+                <action android:name="intent_alarm_log" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".glide.GlideActivity"></activity>
     </application>
 
 </manifest>

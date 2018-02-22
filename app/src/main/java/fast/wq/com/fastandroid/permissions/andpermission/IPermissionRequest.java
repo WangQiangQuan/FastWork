@@ -17,7 +17,7 @@ public interface IPermissionRequest {
     IPermissionRequest requestCode(int requestCode);
 
     /* 用户拒绝过 */
-//    @NonNull
+//    @TestNonNull
     IPermissionRequest rationale(RationaleListener listener);
 
     IPermissionRequest callback(Object callback);

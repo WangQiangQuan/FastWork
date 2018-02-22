@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -36,18 +37,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.CooderatorLayoutActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
+import fast.wq.com.fastandroid.glide.GlideActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
@@ -126,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
 
 //        Intent mintent = new Intent(this, PermissionActivity.class);
 //        Intent mintent = new Intent(this, AnimationActivity.class);
-        Intent mintent = new Intent(this, CooderatorLayoutActivity.class);
+//        Intent mintent = new Intent(this, CooderatorLayoutActivity.class);
 
-        this.startActivity(mintent);
+//        this.startActivity(mintent);
 
 
 //        String a = "111";
@@ -153,7 +155,72 @@ public class MainActivity extends AppCompatActivity {
 //        startTask();
 //        task();
 
+
+//        SpUtil.saveToLocal(this,"user","key","value");
+//        String url =  SpUtil.getFromLocal(this,"user","key","");
+//        Log.i("wang",url);
+//        ArrayList<String> durls = new ArrayList<>();
+//        durls.add("skjflajfla");
+//
+//        BaiduADBean bean = new BaiduADBean("pkg","name",durls,null,null);
+//        Gson mGson = new Gson();
+//       String json =  mGson.toJson(bean);
+//        Log.i("wang", "onCreate: json = "+json);
+//
+//        SpUtil.saveToLocal(this,"user","key",json);
+//        url =  SpUtil.getFromLocal(this,"user","key","");
+//
+//        BaiduADBean newBean = mGson.fromJson(url,BaiduADBean.class);
+//        Log.i("wang", "onCreate: json = "+newBean.getPkg()+"ddd="+newBean.getUrl());
+
+//        mClicklimitMap = new HashMap<>();
+//
+//
+//        String key = "key";
+//        int times = mClicklimitMap.get(key);
+//        Log.i("wang", "onCreate: times"+times);
+
+
+//        Intent mintent = new Intent(this, MainViewActivity.class);
+//        this.startActivity(mintent);
+//        finish();
+
+//        SparseArrayUtils mutils = new SparseArrayUtils();
+//        mutils.test();
+
+//        for (int i=0;i<10;i++){
+//            int sleep = new Random().nextInt(20) * 1000;
+//            Log.i("wang", "onCreate: sleep="+sleep);
+//        }
+
+
+//        String name = "name";
+//
+//        ParcelableBean mb1 = new ParcelableBean();
+//        SerializableBean mb2 = new SerializableBean();
+//
+//        mb1.name = name;
+//        mb2.setName(name);
+//
+//        Intent mintent = new Intent(this, ImageViewActivity.class);
+//        IntentUtils.putParcelable(mintent,"a",mb1);
+//        IntentUtils.putSerial(mintent,"b",mb2);
+//        this.startActivity(mintent);
+
+//        Intent mintent = new Intent(this, DispatchActivity.class);
+//        Intent mintent = new Intent(this, LoopActivity.class);
+        Intent mintent = new Intent(this, GlideActivity.class);
+
+        this.startActivity(mintent);
+
+
+//        TestNonNull.test(TestNonNull.go(0));
+//        TestNonNull.test(null);
     }
+
+    private HashMap<String,Integer> mClicklimitMap;
+    private int limiteClickSize = 3;
+
     Object obj = new Object();
     private void startTask(){
 
@@ -530,6 +597,11 @@ public class MainActivity extends AppCompatActivity {
                 image.setImageBitmap(bitmap);
             }
         });
+
+    }
+
+
+    public void setSwipeBackFactor(@FloatRange(from = 0.0f, to = 1.0f) float swipeBackFactor) {
 
     }
 }

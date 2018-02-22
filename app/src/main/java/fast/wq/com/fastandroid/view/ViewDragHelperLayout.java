@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
- *
+ *http://blog.csdn.net/lmj623565791/article/details/46858663
  */
 
 public class ViewDragHelperLayout extends LinearLayout {
@@ -36,14 +36,18 @@ public class ViewDragHelperLayout extends LinearLayout {
     }
 
     private void init() {
+        //创建实例需要3个参数，第一个就是当前的ViewGroup，第二个sensitivity，主要用于设置touchSlop:
+        //可见传入越大，mTouchSlop的值就会越小。第三个参数就是Callback
+        //哪些子View可以移动、对个移动的View的边界的控制等等。
         mViewDragHelper = ViewDragHelper.create(this, 1.0f, new ViewDragHelper.Callback() {
+           //如何返回ture则表示可以捕获该view，你可以根据传入的第一个view参数决定哪些可以捕获
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
                 return child ==mAutoBackView ||child ==  mDragView;
             }
 
             /**
-             *
+             *child移动的边界进行控制
              * @param child
              * @param left
              * @param dx

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.net.Uri;
+import android.os.Looper;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 import java.io.File;
 
 public class Utils {
+
+    private boolean isMainThread() {
+        return Looper.getMainLooper().getThread().equals(Thread.currentThread());
+    }
     public static int dp2px(Context context, float dipValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
