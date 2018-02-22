@@ -26,11 +26,11 @@ public class TimerUtils {
         mTimer.schedule(mTimerTask,0,1000);
     }
 
-    public abstract class TimerProcessor {
+    public interface  TimerProcessor {
         /**
          * 在TimerTask中执行的操作，由调用者定制
          */
-        public abstract void process();
+        public  void process();
     }
 
     private TimerProcessor mProcessor;

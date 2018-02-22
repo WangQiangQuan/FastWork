@@ -1,4 +1,4 @@
-package fast.quikly.com.libdesign_pattern.single;
+package kuaiya.imitate.designpattern;
 
 /**
  * Created by Administrator on 2016/6/26.
