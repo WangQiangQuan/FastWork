@@ -1,1 +1,1 @@
-include ':app', ':designpattern', ':shortvideolibrary'
+include ':app', ':designpattern', ':shortvideolibrary', ':network'

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
-
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,9 @@ import fast.wq.com.fastandroid.loop.TimerUtils;
 /**
  * 图片轮播
  * https://www.imooc.com/video/13989
+ *
+ * //好轮子
+ * https://www.jianshu.com/p/d229a647e705
  */
 
 public class ImageBannerViewGroup extends ViewGroup {
