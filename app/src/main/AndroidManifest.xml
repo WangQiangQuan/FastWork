@@ -85,9 +85,11 @@
         </receiver>
 
         <activity android:name=".glide.GlideActivity" />
-        <activity android:name=".download.DownloadActivity"></activity>
+        <activity android:name=".download.DownloadActivity" />
 
-        <service android:name=".download.DownLoadService"></service>
+        <service android:name=".download.DownLoadService" />
+
+        <activity android:name="fast.wq.com.rx.RxActivity"></activity>
     </application>
 
 </manifest>

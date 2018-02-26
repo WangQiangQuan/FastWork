@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/designpattern/designpattern.iml" filepath="$PROJECT_DIR$/designpattern/designpattern.iml" />
       <module fileurl="file://$PROJECT_DIR$/network/network.iml" filepath="$PROJECT_DIR$/network/network.iml" />
+      <module fileurl="file://D:\FastWork\FastWork\network\network.iml" filepath="D:\FastWork\FastWork\network\network.iml" />
       <module fileurl="file://$PROJECT_DIR$/shortvideolibrary/shortvideolibrary.iml" filepath="$PROJECT_DIR$/shortvideolibrary/shortvideolibrary.iml" />
     </modules>
   </component>
