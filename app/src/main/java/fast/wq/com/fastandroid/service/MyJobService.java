@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 /**
+ * 对于满足网络、电量、时间等一定预定条件而触发的任务
  * Created by admin on 2017/11/22.
  * JobScheduler来执行这些特殊的后台任务时来减少电量的消耗。
  * 5.0以上才有

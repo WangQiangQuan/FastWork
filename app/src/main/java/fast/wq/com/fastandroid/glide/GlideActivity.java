@@ -18,7 +18,7 @@ public class GlideActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_glide);
-        imageView = (ImageView) findViewById(R.id.image_view);
+//        imageView = (ImageView) findViewById(R.id.image_view);
     }
 
     public void loadImage(View view) {

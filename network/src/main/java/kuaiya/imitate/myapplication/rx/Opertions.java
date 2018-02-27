@@ -1,5 +1,7 @@
 package kuaiya.imitate.myapplication.rx;
 
+import android.util.Log;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Func0;
@@ -27,6 +29,7 @@ public class Opertions {
      * timer
      */
 
+    private static final String TAG = "Opertions";
     private void create(){
         Observable.create(new Observable.OnSubscribe<String>() {
             @Override
@@ -37,16 +40,17 @@ public class Opertions {
             @Override
             public void onCompleted() {
 
+                Log.i(TAG, "onCompleted: ");
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Log.i(TAG, "onError: ");
             }
 
             @Override
             public void onNext(String s) {
-
+                Log.i(TAG, "onNext: ");
             }
         });
     }

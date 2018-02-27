@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.socks.library.KLog;
-
 
 /**
  * Created by wangqiang on 2016/12/15.
@@ -40,7 +38,7 @@ public class SQLiteOpenHelperTest extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        KLog.i();
+//        KLog.i();
         //创建表
         String sql = "create table "+Constant.TABLE_NAME
                 +" ("+ Constant._ID+" Integer primary key,"+ Constant.NAME+" varchar(10) ,"+Constant.AGE+" Integer)";
