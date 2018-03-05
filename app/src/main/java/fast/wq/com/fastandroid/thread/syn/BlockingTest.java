@@ -3,7 +3,6 @@ package fast.wq.com.fastandroid.thread.syn;
 import android.util.Log;
 
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingDeque;
 
 /**
  *
@@ -12,7 +11,8 @@ import java.util.concurrent.BlockingDeque;
 public class BlockingTest {
     private static final String TAG = "BlockingTest";
 
-    public void testMain() {
+    public  void testMain() {
+//        BlockingQueue<String> a = new ArrayBlockingQueue<String>(1);
         ArrayBlockingQueue<String> mbq = new ArrayBlockingQueue<>(1);
         //启动三个生产者线程
         new Producter(mbq).start();
@@ -33,15 +33,18 @@ public class BlockingTest {
         @Override
         public void run() {
             String[] arry = new String[]{"java", "thread", "bq"};
-            for (int i = 0; i < 999999; i++)
+            for (int i = 0; i < 999999; i++) {
                 Log.i(TAG, "run: 生产者准备生产者元素");
-            String value = arry[i % 3];
-            try {
-                Thread.sleep(200);
-                bq.put(value);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+                String value = arry[i % 3];
+                try {
+                    Thread.sleep(200);
+                    bq.put(value);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
             Log.i(TAG, "run: " + getName() + "生产完成" + bq);
         }
     }
@@ -61,7 +64,7 @@ public class BlockingTest {
                 try {
                     Thread.sleep(200);
                     bq.take();
-                } catch (InterruptedException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

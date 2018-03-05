@@ -51,7 +51,7 @@ import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
-import fast.wq.com.fastandroid.utils.ComparatorUtils;
+import fast.wq.com.fastandroid.thread.syn.BlockingTest;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
@@ -217,8 +217,11 @@ public class MainActivity extends AppCompatActivity {
 //        TestNonNull.test(TestNonNull.go(0));
 //        TestNonNull.test(null);
 
-        ComparatorUtils.main();
+//        ComparatorUtils.main();
 //        ComparatorUtils.mainByGroup();
+
+        BlockingTest m = new BlockingTest();
+        m.testMain();
     }
 
     private HashMap<String,Integer> mClicklimitMap;
