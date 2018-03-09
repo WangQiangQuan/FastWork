@@ -49,9 +49,9 @@ import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
+import fast.wq.com.fastandroid.knowledge.StringKnow;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
-import fast.wq.com.fastandroid.thread.syn.BlockingTest;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
@@ -220,10 +220,31 @@ public class MainActivity extends AppCompatActivity {
 //        ComparatorUtils.main();
 //        ComparatorUtils.mainByGroup();
 
-        BlockingTest m = new BlockingTest();
-        m.testMain();
+//        BlockingTest m = new BlockingTest();
+//        m.testMain();
+
+//        Log.i("wang", "onCreate: "+ ConvertUtils.s2i("42d",12));
+//        TestThread mTHread = new TestThread();
+//        mTHread.start();
+//        Log.i("wang", "onCreate: API_SIGNIN = "+API_SIGNIN);
+//        Log.i("wang", "onCreate: API_SIGNIN = "+API_SIGNIN2);
+        StringKnow.test();
     }
 
+
+    //CmccHelper
+    private static final String API = "http://im.zapyamobile.com";
+    private static final String APIStaging = "http://staging.im.zapyamobile.com";
+    //    private static final String APISTAGING = "http://101.251.230.118";
+    private static final String API_SIGNIN = (isStatging()?APIStaging : API )+ "/v1/im/signin";
+    private static final String API_SIGNIN2 = isStatging()?APIStaging : API + "/v1/im/signin";
+    private static boolean isStatging(){
+
+        if(("staging").equals(BuildConfig.BUILD_TYPE)){
+            return true;
+        }
+        return false;
+    }
     private HashMap<String,Integer> mClicklimitMap;
     private int limiteClickSize = 3;
 

@@ -27,4 +27,30 @@ public class SortUtils {
 
         return array;
     }
+
+    /**
+     * 2.选择排序算法
+     */
+    public int[] sortSelect(int[] array) {
+        if (array == null && array.length <= 1) {
+            return array;
+        }
+        for (int i = 0; i < array.length; i++) {
+            int miniPost = i;
+            for (int m = i + 1; m < array.length; m++) {
+                if (array[m] < array[miniPost]) {
+                    miniPost = m;
+                }
+            }
+
+            if (array[i] > array[miniPost]) {
+                int temp;
+                temp = array[i];
+                array[i] = array[miniPost];
+                array[miniPost] = temp;
+            }
+        }
+
+        return array;
+    }
 }
