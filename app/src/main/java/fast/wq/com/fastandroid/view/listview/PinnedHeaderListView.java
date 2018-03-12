@@ -20,7 +20,7 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
 
         public View getSectionHeaderView(int section, View convertView, ViewGroup parent);//head的样式
 
-        public int getSectionHeaderViewType(int section);
+        public int getSectionHeaderViewType(int section);//
 
         public int getCount();
 
@@ -90,7 +90,7 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
         mHeaderOffset = 0.0f;
 
         for (int i = firstVisibleItem; i < firstVisibleItem + visibleItemCount; i++) {
-            if (mAdapter.isSectionHeader(i)) {
+            if (mAdapter.isSectionHeader(i)) {//如果是header
                 View header = getChildAt(i - firstVisibleItem);
                 float headerTop = header.getTop();
                 float pinnedHeaderHeight = mCurrentHeader.getMeasuredHeight();
@@ -142,6 +142,7 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
         }
     }
 
+    //http://blog.csdn.net/u014788227/article/details/52250208
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
