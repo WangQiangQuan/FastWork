@@ -49,13 +49,13 @@ import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
-import fast.wq.com.fastandroid.knowledge.StringKnow;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
+import fast.wq.com.fastandroid.view.listview.PinedListActivity;
 import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
@@ -228,7 +228,13 @@ public class MainActivity extends AppCompatActivity {
 //        mTHread.start();
 //        Log.i("wang", "onCreate: API_SIGNIN = "+API_SIGNIN);
 //        Log.i("wang", "onCreate: API_SIGNIN = "+API_SIGNIN2);
-        StringKnow.test();
+//        StringKnow.test();
+
+//        Test m = new Test();
+//        m.main();
+
+        Intent mintent = new Intent(this, PinedListActivity.class);
+        this.startActivity(mintent);
     }
 
 
@@ -236,80 +242,84 @@ public class MainActivity extends AppCompatActivity {
     private static final String API = "http://im.zapyamobile.com";
     private static final String APIStaging = "http://staging.im.zapyamobile.com";
     //    private static final String APISTAGING = "http://101.251.230.118";
-    private static final String API_SIGNIN = (isStatging()?APIStaging : API )+ "/v1/im/signin";
-    private static final String API_SIGNIN2 = isStatging()?APIStaging : API + "/v1/im/signin";
-    private static boolean isStatging(){
+    private static final String API_SIGNIN = (isStatging() ? APIStaging : API) + "/v1/im/signin";
+    private static final String API_SIGNIN2 = isStatging() ? APIStaging : API + "/v1/im/signin";
 
-        if(("staging").equals(BuildConfig.BUILD_TYPE)){
+    private static boolean isStatging() {
+
+        if (("staging").equals(BuildConfig.BUILD_TYPE)) {
             return true;
         }
         return false;
     }
-    private HashMap<String,Integer> mClicklimitMap;
+
+    private HashMap<String, Integer> mClicklimitMap;
     private int limiteClickSize = 3;
 
     Object obj = new Object();
-    private void startTask(){
 
-        new AsyncTask<Void,Void,Void>(){
+    private void startTask() {
+
+        new AsyncTask<Void, Void, Void>() {
 
             @Override
             protected Void doInBackground(Void... voids) {
                 Log.d(TAG, "doInBackground() called with: voids = [" + voids + "]");
 
 
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Thread.sleep(3000);
-                                Log.d(TAG, "notify() called with: voids = ["  + "]");
-                                obj.notifyAll();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000);
+                            Log.d(TAG, "notify() called with: voids = [" + "]");
+                            obj.notifyAll();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-                    }).start();
-
-                    try {
-                        Log.d(TAG, "wait() called with: voids = ["  + "]");
-                        obj.wait();
-
-
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
+                }).start();
 
-                    Log.d(TAG, "end() called with: voids = [" + voids + "]");
-                    return null;
+                try {
+                    Log.d(TAG, "wait() called with: voids = [" + "]");
+                    obj.wait();
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(TAG, "end() called with: voids = [" + voids + "]");
+                return null;
 
 
             }
         }.execute();
     }
 
-    public ExecutorService mSingleExecutor ;
+    public ExecutorService mSingleExecutor;
     private int a = 0;
-    public void test(){
-        mSingleExecutor =  Executors.newFixedThreadPool(1);
-        for (int i=0;i<20;i++){
-            if ( mSingleExecutor.isShutdown()){
+
+    public void test() {
+        mSingleExecutor = Executors.newFixedThreadPool(1);
+        for (int i = 0; i < 20; i++) {
+            if (mSingleExecutor.isShutdown()) {
                 return;
             }
             mSingleExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    if (isFinishing()){
+                    if (isFinishing()) {
                         return;
                     }
-                    Log.i("wang", "run() called = "+a+" "+System.currentTimeMillis());
+                    Log.i("wang", "run() called = " + a + " " + System.currentTimeMillis());
                     try {
                         a++;
                         Thread.sleep(600);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Log.i("wang", "run() called finish = "+a+" "+System.currentTimeMillis());
+                    Log.i("wang", "run() called finish = " + a + " " + System.currentTimeMillis());
                 }
             });
         }
@@ -399,8 +409,9 @@ public class MainActivity extends AppCompatActivity {
 
                 scanFile(MainActivity.this, mPath);
             }
-        }, ShortVideoDialog.Q480, MainActivity.this,R.style.EnterExitAnimation);
+        }, ShortVideoDialog.Q480, MainActivity.this, R.style.EnterExitAnimation);
     }
+
     public void scanFile(Context context, String filePath) {
         Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         scanIntent.setData(Uri.fromFile(new File(filePath)));
@@ -431,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
 //                ToastUtils.showShort(this, "您已经拒绝过一次");
             }
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO}, CAMERA_PERMISSIONS_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO}, CAMERA_PERMISSIONS_REQUEST_CODE);
         } else {//有权限直接调用系统相机拍照
             go2ShortVideo();
         }
@@ -441,8 +452,8 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode){
-            case  CAMERA_PERMISSIONS_REQUEST_CODE:
+        switch (requestCode) {
+            case CAMERA_PERMISSIONS_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     go2ShortVideo();
                 }
@@ -452,23 +463,25 @@ public class MainActivity extends AppCompatActivity {
 
     public LinkedHashMap<Integer, ArrayList<DmRecommend>> dataMap = new LinkedHashMap<Integer, ArrayList<DmRecommend>>();
     final long awaitTime = 5 * 1000;
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        try{
+        try {
             mSingleExecutor.shutdown();
-            if(!mSingleExecutor.awaitTermination(awaitTime, TimeUnit.MILLISECONDS)){
+            if (!mSingleExecutor.awaitTermination(awaitTime, TimeUnit.MILLISECONDS)) {
                 // 超时的时候向线程池中所有的线程发出中断(interrupted)。
                 mSingleExecutor.shutdownNow();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
     }
 
     private int mJobId = 0;
-    private void jobserver(){
+
+    private void jobserver() {
         JobScheduler scheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         ComponentName componentName = new ComponentName(MainActivity.this, MyJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(++mJobId, componentName);
@@ -479,7 +492,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setOverrideDeadline(Long.valueOf("10") * 1000);
 
         boolean requiresUnmetered = false;
-        boolean requiresAnyConnectivity =false;
+        boolean requiresAnyConnectivity = false;
         if (requiresUnmetered) {
             builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
         } else if (requiresAnyConnectivity) {
@@ -494,7 +507,7 @@ public class MainActivity extends AppCompatActivity {
         scheduler.schedule(builder.build());
     }
 
-    private void xuli(){
+    private void xuli() {
 //        //序列化到本地
 //        User user=new User(0,"wcl_android@163.com","123456");
 //        ObjectOutputStream out=new ObjectOutputStream(new FileOutputStream("user.obj"));
@@ -518,7 +531,7 @@ public class MainActivity extends AppCompatActivity {
 //        bundle.putParcelable("bean", m);
 //        bundle.putParcelable("bean", bean);
         bundle.putParcelable("bean", ms);
-        Intent intent = new Intent(MainActivity.this,PermissionActivity.class);
+        Intent intent = new Intent(MainActivity.this, PermissionActivity.class);
         intent.putExtras(bundle);
 
         startActivity(intent);
@@ -529,29 +542,33 @@ public class MainActivity extends AppCompatActivity {
      * 1scrollerY < 1280 开始滑动
      * 2滑动距离 大于BottomHeight ,全部显示了。
      * 3
+     *
      * @param scrollerY  目标线的高度
      */
     int Sceenheight = 1280;
     int lineHeight = 1300;
     int BottomHeight = 40;
-    private void scroller(int scrollerY){
+
+    private void scroller(int scrollerY) {
 
 
     }
 
 
-    private void task(){
+    private void task() {
 
 //        Task mTask = new Task();
 //        mTask.execute();
         load();
     }
-    public class Task extends AsyncTask<Void,Void,Void>{
-        private  CountDownLatch latch ;
+
+    public class Task extends AsyncTask<Void, Void, Void> {
+        private CountDownLatch latch;
+
         @Override
         protected Void doInBackground(Void... voids) {
             latch = new CountDownLatch(3);
-            createTHread(latch,200);
+            createTHread(latch, 200);
 //            createTHread(latch,500);
 //            createTHread(latch,1000);
             try {
@@ -568,19 +585,20 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(aVoid);
         }
     }
-    private void createTHread(final CountDownLatch latch,final  int time){
+
+    private void createTHread(final CountDownLatch latch, final int time) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Thread.sleep(time);
-                    Log.i("wang", "onPostExecute: time"+time);
+                    Log.i("wang", "onPostExecute: time" + time);
                     latch.countDown();
                     Thread.sleep(time);
-                    Log.i("wang", "onPostExecute: time"+time);
+                    Log.i("wang", "onPostExecute: time" + time);
                     latch.countDown();
                     Thread.sleep(time);
-                    Log.i("wang", "onPostExecute: time"+time);
+                    Log.i("wang", "onPostExecute: time" + time);
                     latch.countDown();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -590,7 +608,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     String url = "http://f.kuaiya.cn/5b1c35a31b7160671aae9d638899ef14.jpg?e=1514876642&token=rQ7At7jVvB9Y5MUc9YfG7C8pEkCJH6ZWgHuEVZNH:TOortYSAHP_jlBU4wlW8uug3yJI=";
-    private void load(){
+
+    private void load() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -601,14 +620,14 @@ public class MainActivity extends AppCompatActivity {
                     conn.connect();
                     InputStream is = conn.getInputStream();
                     int totalLen = conn.getContentLength();
-                  Bitmap bm=  BitmapFactory.decodeStream(is);
+                    Bitmap bm = BitmapFactory.decodeStream(is);
                     bit(bm);
-                    Log.i("wang", "run: bm="+bm);
+                    Log.i("wang", "run: bm=" + bm);
                 } catch (MalformedURLException e) {
-                    Log.i("wang", "run1: e="+e);
+                    Log.i("wang", "run1: e=" + e);
                     e.printStackTrace();
                 } catch (IOException e) {
-                    Log.i("wang", "run:2 e="+e);
+                    Log.i("wang", "run:2 e=" + e);
                     e.printStackTrace();
                 }
 
@@ -616,11 +635,11 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    public void bit(final Bitmap bitmap){
+    public void bit(final Bitmap bitmap) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ImageView image =   (ImageView)findViewById(R.id.image);
+                ImageView image = (ImageView) findViewById(R.id.image);
                 image.setImageBitmap(bitmap);
             }
         });

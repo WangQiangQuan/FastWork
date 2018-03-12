@@ -90,7 +90,8 @@
         <service android:name=".download.DownLoadService" />
 
         <activity android:name="fast.wq.com.rx.RxActivity" />
-        <activity android:name=".view.vp.ViewPagerActivity"></activity>
+        <activity android:name=".view.vp.ViewPagerActivity" />
+        <activity android:name=".view.listview.PinedListActivity"></activity>
     </application>
 
 </manifest>

@@ -66,7 +66,7 @@ public class Account {
         lock.lock();
         try {
             if (balance >= drawAmount) {
-                Log.i(TAG, "run: 取钱成功");
+                Log.i(TAG, "--->run: 取钱成功");
                 try {
                     Thread.sleep(1);
                 } catch (InterruptedException e) {
@@ -81,4 +81,24 @@ public class Account {
             lock.unlock();
         }
     }
+
+    public void saveMoney(double saveAmount) {
+        lock.lock();
+        try {
+            Log.i(TAG, "<--run: 存钱成功");
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            balance = balance + saveAmount;
+            Log.i(TAG, "run: 余额:" + balance);
+
+        } finally {
+            lock.unlock();
+        }
+    }
+
+
+
 }

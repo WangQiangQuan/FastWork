@@ -19,4 +19,8 @@ public class AAA {
      重写
      父类引用指向子类对象
      */
+    /**
+     * 消息摘要
+     * http://blog.csdn.net/jiangwei0910410003/article/details/50402000
+     */
 }
