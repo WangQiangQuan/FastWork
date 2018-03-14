@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import fast.wq.com.fastandroid.R;
 
+/**
+ * https://github.com/JimiSmith/PinnedHeaderListView
+ */
+
 public class PinedListActivity extends AppCompatActivity {
 
     @Override

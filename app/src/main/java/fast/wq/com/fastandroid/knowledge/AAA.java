@@ -23,4 +23,8 @@ public class AAA {
      * 消息摘要
      * http://blog.csdn.net/jiangwei0910410003/article/details/50402000
      */
+    /**
+     * okhttp
+     * http://blog.csdn.net/mwq384807683/article/details/71173442?locationNum=8&fps=1
+     */
 }

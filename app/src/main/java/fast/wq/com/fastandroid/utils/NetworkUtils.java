@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -30,6 +31,9 @@ import static android.telephony.TelephonyManager.NETWORK_TYPE_IDEN;
 import static android.telephony.TelephonyManager.NETWORK_TYPE_LTE;
 import static android.telephony.TelephonyManager.NETWORK_TYPE_UMTS;
 
+/**
+ * https://www.jianshu.com/p/983889116526
+ */
 public class NetworkUtils {
     
     private static HashMap<String, String> headers;
@@ -53,6 +57,31 @@ public class NetworkUtils {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    public static void checkState_23orNew(Context context) {
+        //获得ConnectivityManager对象
+        ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        //获取所有网络连接的信息
+        Network[] networks = connMgr.getAllNetworks();
+        //用于存放网络连接信息
+        StringBuilder sb = new StringBuilder();
+        //通过循环将网络信息逐个取出来
+        for (int i = 0; i < networks.length; i++) {
+            //获取ConnectivityManager对象对应的NetworkInfo对象
+            NetworkInfo networkInfo = connMgr.getNetworkInfo(networks[i]);
+            sb.append(networkInfo.getTypeName() + " connect is " + networkInfo.isConnected());
+        }
+        Log.i("wang", "checkState_23orNew: "+sb.toString());
+    }
+
+    public static void checkAPI(){
+        //检测API是不是小于23，因为到了API23之后getNetworkInfo(int networkType)方法被弃用
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+
+        }
+        Log.i("wang", "checkAPI: "+android.os.Build.VERSION.SDK_INT +" //"+android.os.Build.VERSION_CODES.LOLLIPOP);
     }
 
     public static boolean isNetworkAvailable(Context context) {

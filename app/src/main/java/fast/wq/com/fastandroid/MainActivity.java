@@ -44,6 +44,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fast.wq.com.fastandroid.activity.NiceLayoutActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -55,7 +56,6 @@ import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
-import fast.wq.com.fastandroid.view.listview.PinedListActivity;
 import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
@@ -210,8 +210,9 @@ public class MainActivity extends AppCompatActivity {
 //        Intent mintent = new Intent(this, DispatchActivity.class);
 //        Intent mintent = new Intent(this, LoopActivity.class);
 //        Intent mintent = new Intent(this, GlideActivity.class);
-//
-//        this.startActivity(mintent);
+
+        Intent mintent = new Intent(this, NiceLayoutActivity.class);
+        this.startActivity(mintent);
 
 
 //        TestNonNull.test(TestNonNull.go(0));
@@ -233,8 +234,12 @@ public class MainActivity extends AppCompatActivity {
 //        Test m = new Test();
 //        m.main();
 
-        Intent mintent = new Intent(this, PinedListActivity.class);
-        this.startActivity(mintent);
+//        Intent mintent = new Intent(this, PinedListActivity.class);
+//        this.startActivity(mintent);
+//        NetworkUtils.checkAPI();
+//        NetworkUtils.checkState_23orNew(this);
+
+//        SDcardUtils.test();
     }
 
 
