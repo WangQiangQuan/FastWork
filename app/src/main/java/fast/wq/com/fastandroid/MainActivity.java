@@ -44,7 +44,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.NiceLayoutActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -52,6 +51,7 @@ import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
+import fast.wq.com.fastandroid.thread.syn.ConditionTest;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
@@ -211,8 +211,8 @@ public class MainActivity extends AppCompatActivity {
 //        Intent mintent = new Intent(this, LoopActivity.class);
 //        Intent mintent = new Intent(this, GlideActivity.class);
 
-        Intent mintent = new Intent(this, NiceLayoutActivity.class);
-        this.startActivity(mintent);
+//        Intent mintent = new Intent(this, NiceLayoutActivity.class);
+//        this.startActivity(mintent);
 
 
 //        TestNonNull.test(TestNonNull.go(0));
@@ -240,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
 //        NetworkUtils.checkState_23orNew(this);
 
 //        SDcardUtils.test();
+
+        ConditionTest.test();
     }
 
 

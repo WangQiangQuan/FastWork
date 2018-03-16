@@ -6,6 +6,8 @@ import java.util.Map;
 
 /**
  * http://blog.csdn.net/dayun220/article/details/77720473
+ * 也可以解决
+ * Intent传递数据量过大的问题
  */
 
 public class WeakDataHolder {

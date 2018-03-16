@@ -2,7 +2,7 @@ package kuaiya.imitate.myapplication.bean;
 
 /**
  *
- * Created by zhouwei on 16/11/9.
+ *
  */
 
 public class Movie {

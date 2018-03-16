@@ -12,6 +12,7 @@ import rx.Observable;
 
 /**
  * Created by admin on 2018/2/23.
+ * https://www.jianshu.com/p/308f3c54abdd
  */
 
 public interface MovieService {
