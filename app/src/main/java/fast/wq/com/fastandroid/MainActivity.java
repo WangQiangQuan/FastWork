@@ -44,6 +44,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import fast.wq.com.fastandroid.activity.EmptyInflatActivity;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -51,7 +52,6 @@ import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
-import fast.wq.com.fastandroid.thread.syn.ConditionTest;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 //        BaiduADBean newBean = mGson.fromJson(url,BaiduADBean.class);
 //        Log.i("wang", "onCreate: json = "+newBean.getPkg()+"ddd="+newBean.getUrl());
 
-//        mClicklimitMap = new HashMap<>();
+//        mClicklimitMap = new HashMapUtils<>();
 //
 //
 //        String key = "key";
@@ -241,7 +241,10 @@ public class MainActivity extends AppCompatActivity {
 
 //        SDcardUtils.test();
 
-        ConditionTest.test();
+//        ConditionTest.test();
+
+                Intent mintent = new Intent(this, EmptyInflatActivity.class);
+        this.startActivity(mintent);
     }
 
 

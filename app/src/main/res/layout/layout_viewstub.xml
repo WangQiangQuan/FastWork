@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/showempty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showempty"
+        android:text="showempty" />
+
+    <Button
+        android:id="@+id/showerror"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="showerror"
+        android:text="showerror" />
+
+    <Button
+        android:id="@+id/hide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="hide"
+        android:text="hide" />
+
+    <ViewStub
+        android:id="@+id/id_empty_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:inflatedId="@+id/id_after_inflate"
+        android:layout="@layout/loading_view_layout" />
+
+</LinearLayout>
