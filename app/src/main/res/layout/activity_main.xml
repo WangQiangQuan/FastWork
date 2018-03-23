@@ -23,6 +23,7 @@
         android:layout_centerInParent="true"
         android:background="@drawable/lineargradient"
         android:layout_width="wrap_content"
+        android:visibility="gone"
         android:layout_height="250px">
         <ImageView
             android:id="@+id/image"

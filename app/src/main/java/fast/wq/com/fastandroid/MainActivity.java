@@ -26,6 +26,7 @@ import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.activity.EmptyInflatActivity;
+import fast.wq.com.fastandroid.algorithm.BigMultiply;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
@@ -243,8 +244,13 @@ public class MainActivity extends AppCompatActivity {
 
 //        ConditionTest.test();
 
-                Intent mintent = new Intent(this, EmptyInflatActivity.class);
-        this.startActivity(mintent);
+//                Intent mintent = new Intent(this, EmptyInflatActivity.class);
+//        this.startActivity(mintent);
+
+
+//        Log.i("wang", "onCreate: "+  SortUtils.sortInsert(SortUtils.ar).toString());
+
+
     }
 
 
@@ -371,6 +377,18 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //        return super.dispatchTouchEvent(ev);
 //    }
+
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_UP:
+                Log.i("wang", "dispatchTouchEvent: ");
+                BigMultiply.main();
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
+    }
 
     BadgeChangedListener mListener = new BadgeChangedListener() {
 

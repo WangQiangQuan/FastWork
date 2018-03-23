@@ -7,6 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  *  官方文档说明，安卓开发应避免使用Enum（枚举类），因为相比于静态常量Enum会花费两倍以上的内存
+ *  自定义注解
  */
 
 public class EmueUtils {
@@ -20,7 +21,7 @@ public class EmueUtils {
     public static final int FRIDAY = 5;
     public static final int SATURDAY = 6;
 
-    //用 <span></span>@IntDef "包住" 常量；
+    //用 @IntDef "包住" 常量；
     // @Retention 定义策略
     // 声明构造器
     @IntDef({SUNDAY, MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY})
@@ -62,4 +63,5 @@ public class EmueUtils {
                 break;
         }
     }
+
 }

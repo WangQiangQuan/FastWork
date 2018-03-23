@@ -14,6 +14,12 @@ import rx.functions.Func0;
  * 错误处理 error
  */
 
+/**
+ * Observable. 观察
+ * Observable.OnSubscribe 触发订阅
+ * subscribe 订阅
+ * Subscriber 用户
+ */
 public class Opertions {
     /**
      * 创建
