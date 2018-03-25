@@ -93,7 +93,9 @@
         <activity android:name=".view.vp.ViewPagerActivity" />
         <activity android:name=".view.listview.PinedListActivity" />
         <activity android:name=".activity.NiceLayoutActivity" />
-        <activity android:name=".activity.EmptyInflatActivity"></activity>
+        <activity android:name=".activity.EmptyInflatActivity" />
+        <activity android:name=".knowledge.KLifeActivity" />
+        <activity android:name="fast.wq.com.aidl.ClientAidlActivity"></activity>
     </application>
 
 </manifest>
