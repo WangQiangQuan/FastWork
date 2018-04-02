@@ -6,7 +6,7 @@ import android.os.AsyncTask;
  * 部分源代码阅读
  * AsyncTask:http://blog.csdn.net/whocases/article/details/54289288
  * handler
- * volley
+ * volley ：https://www.jianshu.com/p/15e6209d2e6f
  * eventbus
  * glide
  * greendao
@@ -24,4 +24,10 @@ public class read {
             return null;
         }
     }
+
+
+    private void volleyRead(){
+
+    }
+
 }

@@ -41,6 +41,7 @@ public class BitmapUtils {
         if (width > reqWidth || height >reqHeight){
             final int halfwidth = width / 2;
             final int halfheight = height /2;
+            //不满足条件 让采样率翻2倍
             while ((halfwidth/inSampleSize) >= reqWidth && (halfheight/inSampleSize)>= reqHeight){
                 inSampleSize *= 2;
             }

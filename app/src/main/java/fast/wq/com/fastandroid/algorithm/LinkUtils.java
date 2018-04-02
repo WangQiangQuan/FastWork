@@ -53,6 +53,7 @@ public class LinkUtils {
             head = head.next;
         }
         while (!stack.isEmpty()) {
+            //返回栈顶的值。：peek 不改变栈的值(不删除栈顶的值)，pop会把栈顶的值删除。
             stack.peek().next = head;
             head = stack.pop();
         }
@@ -88,12 +89,13 @@ public class LinkUtils {
 
     /**
      * 4单链表 删除指定数值重复的
+     * 利用HashSet 去重复
      */
     public Node deleteRepeat(Node head) {
         if (head == null) {
             return null;
         }
-        HashSet<Integer> mHashSet = new HashSet<>();
+        HashSet<Integer> mHashSet = new HashSet<>();//不能重复
 
         mHashSet.add(head.data);
         Node pre, cur;
@@ -111,4 +113,21 @@ public class LinkUtils {
 
         return head;
     }
+
+    /**
+     * 反转
+     */
+    public Node reverse(Node node) {
+        Node prev = null;
+        Node now = node;
+        while (now != null) {
+            Node next = now.next;
+            now.next = prev;
+            prev = now;
+            now = next;
+        }
+
+        return prev;
+    }
+
 }

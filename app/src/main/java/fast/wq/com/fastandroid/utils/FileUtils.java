@@ -1,5 +1,7 @@
 package fast.wq.com.fastandroid.utils;
 
+import android.util.Log;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -8,8 +10,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+
+import fast.wq.com.fastandroid.bean.SerializableBean;
 
 /**
  * Created by admin on 2018/2/26.
@@ -86,5 +92,64 @@ public class FileUtils {
                 e.printStackTrace();
             }
         }
+    }
+
+    /**
+     * 序列化本地
+     */
+    static String path = "/AAA/";
+    static String name = "p.txt";
+    public static void putObj(){
+        SerializableBean bean = new SerializableBean();
+        bean.name = "序列化本地";
+
+        try {
+//            File f = new File("d:" + File.separator+"putObj.txt");
+
+            File f  = SDcardUtils.getExternalStorageDirectory();
+            File dir = new File(f.getCanonicalPath() + path);
+
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+            File targetFile = new File(f.getCanonicalPath() + path+name);
+            Log.i("wang", "putObj: "+targetFile.getAbsolutePath());
+            FileOutputStream fos = new FileOutputStream(targetFile);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(bean);
+
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void getObj(){
+        FileInputStream fis = null;
+        try {
+//            fis = new FileInputStream("putObj.out");
+            File f  = SDcardUtils.getExternalStorageDirectory();
+            File dir = new File(f.getCanonicalPath() + path);
+
+            if (!dir.exists()){
+                dir.mkdirs();
+            }
+            File targetFile = new File(f.getCanonicalPath() + path+name);
+            fis = new FileInputStream(targetFile);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            SerializableBean bean = (SerializableBean) ois.readObject();
+            Log.i("wang", "getObj: "+bean.name);
+            ois.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

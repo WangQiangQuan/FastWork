@@ -45,7 +45,7 @@ public class ReflectKnow {
             Log.i(TAG, "printClassMes: " + returnType.getName());
             //返回参数类型
             Class[] parmTypes = ms[i].getParameterTypes();
-            for (Class class1 = parmTypes) {
+            for (Class class1 : parmTypes) {
                 Log.i(TAG, "printClassMes: " + class1.getName());
             }
         }

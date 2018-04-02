@@ -45,15 +45,16 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import fast.wq.com.fastandroid.algorithm.BigMultiply;
 import fast.wq.com.fastandroid.badge.BadgeChangedListener;
 import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
+import fast.wq.com.fastandroid.openGl.OpenGlEsActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
+import fast.wq.com.fastandroid.utils.FileUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
@@ -236,7 +237,8 @@ public class MainActivity extends AppCompatActivity {
 //        m.main();
 
 //        Intent mintent = new Intent(this, PinedListActivity.class);
-//        this.startActivity(mintent);
+        Intent mintent = new Intent(this, OpenGlEsActivity.class);
+        this.startActivity(mintent);
 //        NetworkUtils.checkAPI();
 //        NetworkUtils.checkState_23orNew(this);
 
@@ -251,6 +253,16 @@ public class MainActivity extends AppCompatActivity {
 //        Log.i("wang", "onCreate: "+  SortUtils.sortInsert(SortUtils.ar).toString());
 
 
+//        File cacheDir = SDcardUtils.getDiskCacheDir(this, "wqq");
+
+//        Log.i("wang", "onCreate: "+cacheDir.getAbsolutePath());
+
+        boolean a =false,b = false ,c=true;
+        if (a || b && c) {
+            Log.i("wang", "onCreate: in");
+        } else {
+            Log.i("wang", "onCreate: out");
+        }
     }
 
 
@@ -384,7 +396,15 @@ public class MainActivity extends AppCompatActivity {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_UP:
                 Log.i("wang", "dispatchTouchEvent: ");
-                BigMultiply.main();
+//                BigMultiply.main();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        FileUtils.putObj();
+                        FileUtils.getObj();
+                    }
+                }).start();
                 break;
         }
         return super.dispatchTouchEvent(ev);

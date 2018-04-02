@@ -3,7 +3,6 @@ package fast.wq.com.fastandroid.anim;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.graphics.PointF;
-import android.view.View;
 import android.widget.Button;
 
 /**
@@ -29,6 +28,9 @@ public class ValueAnimtorUtils {
         animator.start();
     }
 
+    /**
+     * 估值器（TypeEvaluator）
+     */
     private void objValue(){
         ValueAnimator animator = ValueAnimator.ofObject(new TypeEvaluator() {
             /**

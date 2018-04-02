@@ -95,7 +95,8 @@
         <activity android:name=".activity.NiceLayoutActivity" />
         <activity android:name=".activity.EmptyInflatActivity" />
         <activity android:name=".knowledge.KLifeActivity" />
-        <activity android:name="fast.wq.com.aidl.ClientAidlActivity"></activity>
+        <activity android:name="fast.wq.com.aidl.ClientAidlActivity" />
+        <activity android:name=".openGl.OpenGlEsActivity"></activity>
     </application>
 
 </manifest>
