@@ -50,7 +50,6 @@ import fast.wq.com.fastandroid.badge.BadgeMessage;
 import fast.wq.com.fastandroid.bean.ListBean;
 import fast.wq.com.fastandroid.bean.SClass;
 import fast.wq.com.fastandroid.bean.pClass;
-import fast.wq.com.fastandroid.openGl.OpenGlEsActivity;
 import fast.wq.com.fastandroid.permissions.PermissionActivity;
 import fast.wq.com.fastandroid.service.MyJobService;
 import fast.wq.com.fastandroid.utils.DmSpannableUtils;
@@ -58,6 +57,7 @@ import fast.wq.com.fastandroid.utils.FileUtils;
 import fast.wq.com.fastandroid.utils.Utils;
 import fast.wq.com.fastandroid.view.DynamicView;
 import fast.wq.com.fastandroid.view.TaskLinerLayout;
+import fast.wq.com.fastandroid.view.dispatch.DispatchActivity;
 import fast.wq.com.fastandroid.view.recyclerview.fengzhuang.DmRecommend;
 import kuaiya.imitate.shortvideolibrary.ShortVideoDialog;
 
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 //        IntentUtils.putSerial(mintent,"b",mb2);
 //        this.startActivity(mintent);
 
-//        Intent mintent = new Intent(this, DispatchActivity.class);
+        Intent mintent = new Intent(this, DispatchActivity.class);
 //        Intent mintent = new Intent(this, LoopActivity.class);
 //        Intent mintent = new Intent(this, GlideActivity.class);
 
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
 //        m.main();
 
 //        Intent mintent = new Intent(this, PinedListActivity.class);
-        Intent mintent = new Intent(this, OpenGlEsActivity.class);
+//        Intent mintent = new Intent(this, OpenGlEsActivity.class);
         this.startActivity(mintent);
 //        NetworkUtils.checkAPI();
 //        NetworkUtils.checkState_23orNew(this);

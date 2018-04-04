@@ -49,7 +49,8 @@ public class MyRelativeLayout extends RelativeLayout {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Log.i(TAG, "onInterceptTouchEvent: ACTION_DOWN");
-                break;
+//                break;
+                return true;
             case MotionEvent.ACTION_MOVE:
                 Log.i(TAG, "onInterceptTouchEvent: ACTION_MOVE");
                 break;
@@ -84,7 +85,8 @@ public class MyRelativeLayout extends RelativeLayout {
             default:
                 break;
         }
-        return super.onTouchEvent(event);
+        return true;
+//        return super.onTouchEvent(event);
     }
 }
 
