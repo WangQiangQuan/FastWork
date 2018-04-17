@@ -1,5 +1,6 @@
 package fast.wq.com.fastandroid.knowledge;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,7 +39,7 @@ import fast.wq.com.fastandroid.R;
  *
  *   adb shell dumpsys activity 查看activity信息
  */
-public class KLifeActivity extends AppCompatActivity {
+public class KLifeActivity extends Activity {
 
     private static final String TAG = "KLife";
     /**
@@ -138,3 +139,7 @@ public class KLifeActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
     }
 }
+/**
+ * framework层
+ * 
+ */

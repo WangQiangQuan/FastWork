@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 /**
@@ -59,5 +60,32 @@ public class ViewUtil {
                         "输入结束后的内容为 [" + text.toString()+" ] 即将显示在屏幕上");
             }
         });
+    }
+
+    /**
+     * 通知父布局占用宽高
+     *  view.getMeasuredHeight() 才可以取到数值
+     * @param view
+     */
+    private void measureView(View view) {
+        ViewGroup.LayoutParams p = view.getLayoutParams();
+        if (p == null) {
+            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
+                    , ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+        /**
+         * spec–viewGroup的属性，measureChildren传递过来的参数
+         padding–viewGroup的padding或者margin
+         childDimension–childView想要的大小
+         */
+        int width = ViewGroup.getChildMeasureSpec(0,0,p.width);
+        int height;
+        int tempHeight = p.width;
+        if (tempHeight >0){
+            height = View.MeasureSpec.makeMeasureSpec(tempHeight, View.MeasureSpec.EXACTLY);
+        }else {
+            height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        }
+        view.measure(width,height);
     }
 }

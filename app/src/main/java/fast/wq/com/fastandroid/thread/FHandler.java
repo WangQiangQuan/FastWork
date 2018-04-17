@@ -9,8 +9,15 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Handler 产生根本原因 ：activity中多个线程同时更新ui，并且没有加锁机制。
+ *
+ * postdelay https://blog.csdn.net/kesalin/article/details/37765707
+ * https://blog.csdn.net/u013718120/article/details/53115824
+ * https://blog.csdn.net/windskier/article/details/6995546
+ *
  */
 
 public class FHandler {
@@ -21,6 +28,27 @@ public class FHandler {
             super.handleMessage(msg);
         }
     };
+
+    private static class MyHandler extends Handler {
+
+        private WeakReference<Activity> activityWeakReference;
+
+        public MyHandler(Activity activity) {
+            activityWeakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            Activity activity = activityWeakReference.get();
+            if (activity != null) {
+                if (msg.what == 1) {
+                    // 做相应逻辑
+                }
+            }
+        }
+    }
+
+
 
     private void send(){
         mHandler.obtainMessage().sendToTarget();
@@ -54,6 +82,15 @@ public class FHandler {
         myThread.mhandler.obtainMessage().sendToTarget();
     }
 
+    private void remove(){
+        mHHanler.removeCallbacksAndMessages(null);
+        mHHanler.removeCallbacks(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
+    }
     /**
      * HandlerThread
      */
@@ -72,6 +109,13 @@ public class FHandler {
             }
         };
         mHHanler.sendEmptyMessage(1);
+
+        mHHanler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        },100);
     }
 
     /**

@@ -201,6 +201,7 @@ public class SwipeBackLayout extends ViewGroup {
     }
 
     public void smoothScrollToX(int finalLeft) {
+        //回到初始的位置
         if (mDragHelper.settleCapturedViewAt(finalLeft, getPaddingTop())) {
             ViewCompat.postInvalidateOnAnimation(this);
         }
@@ -214,11 +215,24 @@ public class SwipeBackLayout extends ViewGroup {
 
     private class DragHelperCallback extends ViewDragHelper.Callback {
 
+        /**
+         * tryCaptureView如何返回ture则表示可以捕获该view
+         * @param child
+         * @param pointerId
+         * @return
+         */
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
             return child == mDragContentView;
         }
 
+        /**
+         * 可以在该方法中对child移动的边界进行控制，left , top 分别为即将移动到的位置
+         * @param child
+         * @param left
+         * @param dx
+         * @return
+         */
         @Override
         public int clampViewPositionHorizontal(View child, int left, int dx) {
             leftOffset = getPaddingLeft();
@@ -245,6 +259,14 @@ public class SwipeBackLayout extends ViewGroup {
             return topOffset;
         }
 
+        /**
+         * 当captureview的位置发生改变时回调
+         * @param changedView
+         * @param left
+         * @param top
+         * @param dx
+         * @param dy
+         */
         @Override
         public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
             super.onViewPositionChanged(changedView, left, top, dx, dy);
@@ -265,6 +287,12 @@ public class SwipeBackLayout extends ViewGroup {
             }
         }
 
+        /**
+         *    //手指释放的时候回调
+         * @param releasedChild
+         * @param xvel
+         * @param yvel
+         */
         @Override
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             super.onViewReleased(releasedChild, xvel, yvel);
@@ -305,6 +333,10 @@ public class SwipeBackLayout extends ViewGroup {
             }
         }
 
+        /**
+         * 状态发生改变
+         * @param state
+         */
         @Override
         public void onViewDragStateChanged(int state) {
             super.onViewDragStateChanged(state);
@@ -319,6 +351,11 @@ public class SwipeBackLayout extends ViewGroup {
             }
         }
 
+        /**
+         * ：getViewHorizontalDragRange和getViewVerticalDragRange，只有这两个方法返回大于0的值才能正常的捕获。
+         * @param child
+         * @return
+         */
         @Override
         public int getViewHorizontalDragRange(View child) {
             return width;
@@ -329,6 +366,11 @@ public class SwipeBackLayout extends ViewGroup {
             return height;
         }
 
+        /**
+         * 当触摸到边界时回调。
+         * @param edgeFlags
+         * @param pointerId
+         */
         @Override
         public void onEdgeTouched(int edgeFlags, int pointerId) {
             super.onEdgeTouched(edgeFlags, pointerId);

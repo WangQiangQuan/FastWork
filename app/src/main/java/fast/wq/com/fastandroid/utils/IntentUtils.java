@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.io.Serializable;
 
 /**
- * 传参数
+ * 传参数 0.5M以下
  */
 
 public class IntentUtils {
