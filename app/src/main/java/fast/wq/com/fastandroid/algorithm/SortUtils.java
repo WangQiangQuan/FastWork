@@ -1,5 +1,8 @@
 package fast.wq.com.fastandroid.algorithm;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * http://blog.csdn.net/lespace/article/details/52145598
  */
@@ -10,7 +13,10 @@ public class SortUtils {
 
     /**
      * 1.插入排序算法
-     * 插入排序的基本思想是在遍历数组的过程中，假设在序号 i 之前的元素即 [0..i-1] 都已经排好序，本趟需要找到 i 对应的元素 x 的正确位置 k ，并且在寻找这个位置 k 的过程中逐个将比较过的元素往后移一位，为元素 x “腾位置”，最后将 k 对应的元素值赋为 x ，一般情况下，插入排序的时间复杂度和空间复杂度分别为 O(n2 ) 和 O(1)。
+     * 插入排序的基本思想是在遍历数组的过程中，
+     * 假设在序号 i 之前的元素即 [0..i-1] 都已经排好序，本趟需要找到 i 对应的元素 x 的正确位置 k ，
+     * 并且在寻找这个位置 k 的过程中逐个将比较过的元素往后移一位，为元素 x “腾位置”，最后将 k 对应的元素值赋为 x ，
+     * 一般情况下，插入排序的时间复杂度和空间复杂度分别为 O(n2 ) 和 O(1)。
      */
     public static int[] sortInsert(int[] array) {
         if (array == null && array.length <= 1) {
@@ -110,4 +116,45 @@ public class SortUtils {
     /**
      * 5.合并排序算法
      */
+
+
+    /**
+     * 输出一个集合的所有子集合-Java代码实现
+     * //www.zhihu.com/question/29985661/answer/46501393
+     */
+
+    public static void main(String[] args) {
+        int[] set = new int[]{1,2};
+        Set<Set<Integer>> result = getSubSet(set);	//调用方法
+
+        //输出结果
+        for(Set<Integer> subSet: result){
+            for(Integer num: subSet)
+                System.out.print(num);
+
+            System.out.println("");
+        }
+    }
+
+    public static Set<Set<Integer>> getSubSet(int[] set){
+        Set<Set<Integer>> result = new HashSet<Set<Integer>>();	//用来存放子集的集合，如{{},{1},{2},{1,2}}
+        int length = set.length;
+        int num = length==0 ? 0 : 1<<(length);	//2的n次方，若集合set为空，num为0；若集合set有4个元素，那么num为16.
+
+        //从0到2^n-1（[00...00]到[11...11]）
+        for(int i = 0; i < num; i++){
+            Set<Integer> subSet = new HashSet<Integer>();
+
+            int index = i;
+            for(int j = 0; j < length; j++){
+                if((index & 1) == 1){		//每次判断index最低位是否为1，为1则把集合set的第j个元素放到子集中
+                    subSet.add(set[j]);
+                }
+                index >>= 1;		//右移一位
+            }
+
+            result.add(subSet);		//把子集存储起来
+        }
+        return result;
+    }
 }

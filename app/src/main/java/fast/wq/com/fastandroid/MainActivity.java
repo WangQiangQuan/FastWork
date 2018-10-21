@@ -698,4 +698,8 @@ public class MainActivity extends AppCompatActivity {
     public void setSwipeBackFactor(@FloatRange(from = 0.0f, to = 1.0f) float swipeBackFactor) {
 
     }
+
+    private void go(){
+
+    }
 }

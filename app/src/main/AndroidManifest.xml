@@ -53,6 +53,11 @@
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
+        <!-- 守护进程 -->
+        <service
+            android:name=".service.GuardService"
+            android:process=":guardService" />
+        <service android:name=".service.MessageService" />
 
         <activity android:name=".activity.WaterFallActivity" />
         <activity android:name=".activity.CooBeaverActivity" />
@@ -96,7 +101,8 @@
         <activity android:name=".activity.EmptyInflatActivity" />
         <activity android:name=".knowledge.KLifeActivity" />
         <activity android:name="fast.wq.com.aidl.ClientAidlActivity" />
-        <activity android:name=".openGl.OpenGlEsActivity"></activity>
+        <activity android:name=".openGl.OpenGlEsActivity" />
+        <activity android:name=".permissions.PerActivity"></activity>
     </application>
 
 </manifest>

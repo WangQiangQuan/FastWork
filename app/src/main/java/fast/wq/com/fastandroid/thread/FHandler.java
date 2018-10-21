@@ -137,6 +137,8 @@ public class FHandler {
         });
         mHandler.sendEmptyMessage(1);
 
+        mHHanler.sendMessage(Message.obtain());
+
         m.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -144,6 +146,10 @@ public class FHandler {
             }
         });
 
+        /**
+         * https://segmentfault.com/a/1190000011026324
+         * 7.0后的改变
+         */
         v.post(new Runnable() {
             @Override
             public void run() {
